@@ -1,0 +1,10 @@
+targets:
+  $default:
+    builders:
+      slang_build_runner:
+        options:
+          base_locale: en_US
+          input_directory: i18n
+          input_file_pattern: .i18n.yaml
+          output_format: single_file
+          fallback_strategy: base_locale

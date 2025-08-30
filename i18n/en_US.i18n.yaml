@@ -1,0 +1,130 @@
+# Meta information about this translation file
+meta:
+  languageName: English
+  regionName: United States
+  created: '2025-07-15'
+  updated: '2025-08-30'
+
+# Application title and slogan
+app:
+  title: Minova
+  slogan: Live min, think max.
+
+# Common labels shared across the app
+common:
+  save: Save
+  cancel: Cancel
+  close: Close
+  success: Success
+  failed: Failed
+
+# Labels and option titles in the settings screen
+settings:
+  title: Settings
+  groups:
+    general:
+      title: General
+      language: Language
+      theme: Theme
+    appearance:
+      title: Appearance
+      themeMode:
+        title: Theme Mode
+        light: Light Mode
+        dark: Dark Mode
+        system: Sync with System
+      pomodoroStyle:
+        title: Pomodoro Style
+        currentTime: Current Time
+        countdownTimer: Countdown Timer
+        progressBar: Progress Bar
+        breathingBall: Breathing Ball
+    about:
+      title: About
+      page: Project Page
+      gitHub: GitHub Repository
+      email: Contact via Email
+
+# Labels in the pomodoro screen (main screen)
+pomodoro:
+  title: Pomodoro
+  controls:
+    start: Start
+    pause: Pause
+    resume: Resume
+    stop: Stop
+    skipPhase: Skip Phase
+    resetPhase: Reset Phase
+  phases:
+    focus: Focus
+    break: Break
+    shortBreak: Short Break
+    longBreak: Long Break
+
+# Labels in the music player popup menu
+musicPlayer:
+  title: Music Player
+  controls:
+    play: Play
+    pause: Pause
+    previous: Previous
+    next: Next
+
+# Labels in the sound mixer popup menu
+soundMixer:
+  title: Sound Mixer
+
+# All the assets.
+assets:
+  # Album titles are proper names and will fall back to English if left untranslated.
+  albums:
+    happyPlace:
+      title: Happy Place
+    bloom:
+      title: Bloom
+    oasis:
+      title: Oasis
+    distantWorlds:
+      title: Distant Worlds
+    cityNights2:
+      title: City Nights 2
+  # Music track titles and artist names are proper names and will fall back to English if left untranslated.
+  musicTracks:
+    daydreams:
+      title: Daydreams
+      artist: Purrple Cat
+    strawberryLemonade:
+      title: Strawberry Lemonade
+      artist: Purrple Cat
+    greenTea:
+      title: Green Tea
+      artist: Purrple Cat
+    wishingWell:
+      title: Wishing Well
+      artist: Purrple Cat
+    beautifulDay:
+      title: Beautiful Day
+      artist: Purrple Cat
+    missingYou:
+      title: Missing You
+      artist: Purrple Cat
+    fallingStar:
+      title: Falling Star
+      artist: Purrple Cat
+    lonely:
+      title: Lonely
+      artist: Purrple Cat
+  # Ambient sound (continuous ambient sounds & random-triggered ambient sound pools) names are descriptive UI text and must be translated for each language.
+  ambientSounds:
+    rain:
+      title: Rain
+    birdChirp:
+      title: Bird Chirp
+    cricket:
+      title: Cricket
+    owlHoot:
+      title: Owl Hoot
+    pencilWrite:
+      title: Pencil Write
+    thunder:
+      title: Thunder
