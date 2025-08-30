@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:minova/common/theme/theme.dart';
 
 void main() {
   runApp(const MinovaApp());
@@ -12,6 +13,9 @@ class MinovaApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Minova',
+      theme: minovaLightTheme,
+      darkTheme: minovaDarkTheme,
+      themeMode: ThemeMode.system,
       home: const MinovaHomePage(title: 'Minova'),
     );
   }
