@@ -8,3 +8,8 @@ targets:
           input_file_pattern: .i18n.yaml
           output_format: single_file
           fallback_strategy: base_locale
+          flat_map: false
+          maps:
+          - assets.musicTracks
+          - assets.albums
+          - assets.ambientSounds

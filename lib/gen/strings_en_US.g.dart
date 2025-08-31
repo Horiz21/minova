@@ -24,15 +24,10 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 		    overrides: overrides ?? {},
 		    cardinalResolver: cardinalResolver,
 		    ordinalResolver: ordinalResolver,
-		  ) {
-		$meta.setFlatMapFunction(_flatMapFunction);
-	}
+		  );
 
 	/// Metadata for the translations of <en-US>.
 	@override final TranslationMetadata<AppLocale, Translations> $meta;
-
-	/// Access flat map
-	dynamic operator[](String key) => $meta.getTranslation(key);
 
 	late final Translations _root = this; // ignore: unused_field
 
@@ -120,11 +115,7 @@ class TranslationsSettingsEnUs {
 	/// en-US: 'Settings'
 	String get title => 'Settings';
 
-	late final TranslationsSettingsLanguageEnUs language = TranslationsSettingsLanguageEnUs.internal(_root);
-	late final TranslationsSettingsThemeModeEnUs themeMode = TranslationsSettingsThemeModeEnUs.internal(_root);
-	late final TranslationsSettingsThemeEnUs theme = TranslationsSettingsThemeEnUs.internal(_root);
-	late final TranslationsSettingsPomodoroAppearanceEnUs pomodoroAppearance = TranslationsSettingsPomodoroAppearanceEnUs.internal(_root);
-	late final TranslationsSettingsAboutEnUs about = TranslationsSettingsAboutEnUs.internal(_root);
+	late final TranslationsSettingsGroupsEnUs groups = TranslationsSettingsGroupsEnUs.internal(_root);
 }
 
 // Path: pomodoro
@@ -175,99 +166,43 @@ class TranslationsAssetsEnUs {
 	final Translations _root; // ignore: unused_field
 
 	// Translations
-	late final TranslationsAssetsAlbumsEnUs albums = TranslationsAssetsAlbumsEnUs.internal(_root);
-	late final TranslationsAssetsMusicTracksEnUs musicTracks = TranslationsAssetsMusicTracksEnUs.internal(_root);
-	late final TranslationsAssetsAmbientSoundsEnUs ambientSounds = TranslationsAssetsAmbientSoundsEnUs.internal(_root);
+	Map<String, dynamic> get albums => {
+		'happyPlace': TranslationsAssetsAlbumsHappyPlaceEnUs.internal(_root),
+		'bloom': TranslationsAssetsAlbumsBloomEnUs.internal(_root),
+		'oasis': TranslationsAssetsAlbumsOasisEnUs.internal(_root),
+		'distantWorlds': TranslationsAssetsAlbumsDistantWorldsEnUs.internal(_root),
+		'cityNights2': TranslationsAssetsAlbumsCityNights2EnUs.internal(_root),
+	};
+	Map<String, dynamic> get musicTracks => {
+		'daydreams': TranslationsAssetsMusicTracksDaydreamsEnUs.internal(_root),
+		'strawberryLemonade': TranslationsAssetsMusicTracksStrawberryLemonadeEnUs.internal(_root),
+		'greenTea': TranslationsAssetsMusicTracksGreenTeaEnUs.internal(_root),
+		'wishingWell': TranslationsAssetsMusicTracksWishingWellEnUs.internal(_root),
+		'beautifulDay': TranslationsAssetsMusicTracksBeautifulDayEnUs.internal(_root),
+		'missingYou': TranslationsAssetsMusicTracksMissingYouEnUs.internal(_root),
+		'fallingStar': TranslationsAssetsMusicTracksFallingStarEnUs.internal(_root),
+		'lonely': TranslationsAssetsMusicTracksLonelyEnUs.internal(_root),
+	};
+	Map<String, dynamic> get ambientSounds => {
+		'rain': TranslationsAssetsAmbientSoundsRainEnUs.internal(_root),
+		'birdChirp': TranslationsAssetsAmbientSoundsBirdChirpEnUs.internal(_root),
+		'cricket': TranslationsAssetsAmbientSoundsCricketEnUs.internal(_root),
+		'owlHoot': TranslationsAssetsAmbientSoundsOwlHootEnUs.internal(_root),
+		'pencilWrite': TranslationsAssetsAmbientSoundsPencilWriteEnUs.internal(_root),
+		'thunder': TranslationsAssetsAmbientSoundsThunderEnUs.internal(_root),
+	};
 }
 
-// Path: settings.language
-class TranslationsSettingsLanguageEnUs {
-	TranslationsSettingsLanguageEnUs.internal(this._root);
+// Path: settings.groups
+class TranslationsSettingsGroupsEnUs {
+	TranslationsSettingsGroupsEnUs.internal(this._root);
 
 	final Translations _root; // ignore: unused_field
 
 	// Translations
-
-	/// en-US: 'Language'
-	String get title => 'Language';
-}
-
-// Path: settings.themeMode
-class TranslationsSettingsThemeModeEnUs {
-	TranslationsSettingsThemeModeEnUs.internal(this._root);
-
-	final Translations _root; // ignore: unused_field
-
-	// Translations
-
-	/// en-US: 'Theme Mode'
-	String get title => 'Theme Mode';
-
-	/// en-US: 'Light Mode'
-	String get light => 'Light Mode';
-
-	/// en-US: 'Dark Mode'
-	String get dark => 'Dark Mode';
-
-	/// en-US: 'Sync with System'
-	String get system => 'Sync with System';
-}
-
-// Path: settings.theme
-class TranslationsSettingsThemeEnUs {
-	TranslationsSettingsThemeEnUs.internal(this._root);
-
-	final Translations _root; // ignore: unused_field
-
-	// Translations
-
-	/// en-US: 'Theme'
-	String get title => 'Theme';
-}
-
-// Path: settings.pomodoroAppearance
-class TranslationsSettingsPomodoroAppearanceEnUs {
-	TranslationsSettingsPomodoroAppearanceEnUs.internal(this._root);
-
-	final Translations _root; // ignore: unused_field
-
-	// Translations
-
-	/// en-US: 'Pomodoro Appearance'
-	String get title => 'Pomodoro Appearance';
-
-	/// en-US: 'Current Time'
-	String get currentTime => 'Current Time';
-
-	/// en-US: 'Countdown Timer'
-	String get countdownTimer => 'Countdown Timer';
-
-	/// en-US: 'Progress Bar'
-	String get progressBar => 'Progress Bar';
-
-	/// en-US: 'Breathing Ball'
-	String get breathingBall => 'Breathing Ball';
-}
-
-// Path: settings.about
-class TranslationsSettingsAboutEnUs {
-	TranslationsSettingsAboutEnUs.internal(this._root);
-
-	final Translations _root; // ignore: unused_field
-
-	// Translations
-
-	/// en-US: 'About'
-	String get title => 'About';
-
-	/// en-US: 'Project Page'
-	String get page => 'Project Page';
-
-	/// en-US: 'GitHub Repository'
-	String get gitHub => 'GitHub Repository';
-
-	/// en-US: 'Contact via Email'
-	String get email => 'Contact via Email';
+	late final TranslationsSettingsGroupsGeneralEnUs general = TranslationsSettingsGroupsGeneralEnUs.internal(_root);
+	late final TranslationsSettingsGroupsAppearanceEnUs appearance = TranslationsSettingsGroupsAppearanceEnUs.internal(_root);
+	late final TranslationsSettingsGroupsAboutEnUs about = TranslationsSettingsGroupsAboutEnUs.internal(_root);
 }
 
 // Path: pomodoro.controls
@@ -337,52 +272,6 @@ class TranslationsMusicPlayerControlsEnUs {
 
 	/// en-US: 'Next'
 	String get next => 'Next';
-}
-
-// Path: assets.albums
-class TranslationsAssetsAlbumsEnUs {
-	TranslationsAssetsAlbumsEnUs.internal(this._root);
-
-	final Translations _root; // ignore: unused_field
-
-	// Translations
-	late final TranslationsAssetsAlbumsHappyPlaceEnUs happyPlace = TranslationsAssetsAlbumsHappyPlaceEnUs.internal(_root);
-	late final TranslationsAssetsAlbumsBloomEnUs bloom = TranslationsAssetsAlbumsBloomEnUs.internal(_root);
-	late final TranslationsAssetsAlbumsOasisEnUs oasis = TranslationsAssetsAlbumsOasisEnUs.internal(_root);
-	late final TranslationsAssetsAlbumsDistantWorldsEnUs distantWorlds = TranslationsAssetsAlbumsDistantWorldsEnUs.internal(_root);
-	late final TranslationsAssetsAlbumsCityNights2EnUs cityNights2 = TranslationsAssetsAlbumsCityNights2EnUs.internal(_root);
-}
-
-// Path: assets.musicTracks
-class TranslationsAssetsMusicTracksEnUs {
-	TranslationsAssetsMusicTracksEnUs.internal(this._root);
-
-	final Translations _root; // ignore: unused_field
-
-	// Translations
-	late final TranslationsAssetsMusicTracksDaydreamsEnUs daydreams = TranslationsAssetsMusicTracksDaydreamsEnUs.internal(_root);
-	late final TranslationsAssetsMusicTracksStrawberryLemonadeEnUs strawberryLemonade = TranslationsAssetsMusicTracksStrawberryLemonadeEnUs.internal(_root);
-	late final TranslationsAssetsMusicTracksGreenTeaEnUs greenTea = TranslationsAssetsMusicTracksGreenTeaEnUs.internal(_root);
-	late final TranslationsAssetsMusicTracksWishingWellEnUs wishingWell = TranslationsAssetsMusicTracksWishingWellEnUs.internal(_root);
-	late final TranslationsAssetsMusicTracksBeautifulDayEnUs beautifulDay = TranslationsAssetsMusicTracksBeautifulDayEnUs.internal(_root);
-	late final TranslationsAssetsMusicTracksMissingYouEnUs missingYou = TranslationsAssetsMusicTracksMissingYouEnUs.internal(_root);
-	late final TranslationsAssetsMusicTracksFallingStarEnUs fallingStar = TranslationsAssetsMusicTracksFallingStarEnUs.internal(_root);
-	late final TranslationsAssetsMusicTracksLonelyEnUs lonely = TranslationsAssetsMusicTracksLonelyEnUs.internal(_root);
-}
-
-// Path: assets.ambientSounds
-class TranslationsAssetsAmbientSoundsEnUs {
-	TranslationsAssetsAmbientSoundsEnUs.internal(this._root);
-
-	final Translations _root; // ignore: unused_field
-
-	// Translations
-	late final TranslationsAssetsAmbientSoundsRainEnUs rain = TranslationsAssetsAmbientSoundsRainEnUs.internal(_root);
-	late final TranslationsAssetsAmbientSoundsBirdChirpEnUs birdChirp = TranslationsAssetsAmbientSoundsBirdChirpEnUs.internal(_root);
-	late final TranslationsAssetsAmbientSoundsCricketEnUs cricket = TranslationsAssetsAmbientSoundsCricketEnUs.internal(_root);
-	late final TranslationsAssetsAmbientSoundsOwlHootEnUs owlHoot = TranslationsAssetsAmbientSoundsOwlHootEnUs.internal(_root);
-	late final TranslationsAssetsAmbientSoundsPencilWriteEnUs pencilWrite = TranslationsAssetsAmbientSoundsPencilWriteEnUs.internal(_root);
-	late final TranslationsAssetsAmbientSoundsThunderEnUs thunder = TranslationsAssetsAmbientSoundsThunderEnUs.internal(_root);
 }
 
 // Path: assets.albums.happyPlace
@@ -637,84 +526,101 @@ class TranslationsAssetsAmbientSoundsThunderEnUs {
 	String get title => 'Thunder';
 }
 
-/// Flat map(s) containing all translations.
-/// Only for edge cases! For simple maps, use the map function of this library.
-extension on Translations {
-	dynamic _flatMapFunction(String path) {
-		switch (path) {
-			case 'meta.languageName': return 'English';
-			case 'meta.regionName': return 'United States';
-			case 'meta.created': return '2025-07-15';
-			case 'meta.updated': return '2025-08-30';
-			case 'app.title': return 'Minova';
-			case 'app.slogan': return 'Live min, think max.';
-			case 'common.save': return 'Save';
-			case 'common.cancel': return 'Cancel';
-			case 'common.close': return 'Close';
-			case 'common.success': return 'Success';
-			case 'common.failed': return 'Failed';
-			case 'settings.title': return 'Settings';
-			case 'settings.language.title': return 'Language';
-			case 'settings.themeMode.title': return 'Theme Mode';
-			case 'settings.themeMode.light': return 'Light Mode';
-			case 'settings.themeMode.dark': return 'Dark Mode';
-			case 'settings.themeMode.system': return 'Sync with System';
-			case 'settings.theme.title': return 'Theme';
-			case 'settings.pomodoroAppearance.title': return 'Pomodoro Appearance';
-			case 'settings.pomodoroAppearance.currentTime': return 'Current Time';
-			case 'settings.pomodoroAppearance.countdownTimer': return 'Countdown Timer';
-			case 'settings.pomodoroAppearance.progressBar': return 'Progress Bar';
-			case 'settings.pomodoroAppearance.breathingBall': return 'Breathing Ball';
-			case 'settings.about.title': return 'About';
-			case 'settings.about.page': return 'Project Page';
-			case 'settings.about.gitHub': return 'GitHub Repository';
-			case 'settings.about.email': return 'Contact via Email';
-			case 'pomodoro.title': return 'Pomodoro';
-			case 'pomodoro.controls.start': return 'Start';
-			case 'pomodoro.controls.pause': return 'Pause';
-			case 'pomodoro.controls.resume': return 'Resume';
-			case 'pomodoro.controls.stop': return 'Stop';
-			case 'pomodoro.controls.skipPhase': return 'Skip Phase';
-			case 'pomodoro.controls.resetPhase': return 'Reset Phase';
-			case 'pomodoro.phases.focus': return 'Focus';
-			case 'pomodoro.phases.kBreak': return 'Break';
-			case 'pomodoro.phases.shortBreak': return 'Short Break';
-			case 'pomodoro.phases.longBreak': return 'Long Break';
-			case 'musicPlayer.title': return 'Music Player';
-			case 'musicPlayer.controls.play': return 'Play';
-			case 'musicPlayer.controls.pause': return 'Pause';
-			case 'musicPlayer.controls.previous': return 'Previous';
-			case 'musicPlayer.controls.next': return 'Next';
-			case 'soundMixer.title': return 'Sound Mixer';
-			case 'assets.albums.happyPlace.title': return 'Happy Place';
-			case 'assets.albums.bloom.title': return 'Bloom';
-			case 'assets.albums.oasis.title': return 'Oasis';
-			case 'assets.albums.distantWorlds.title': return 'Distant Worlds';
-			case 'assets.albums.cityNights2.title': return 'City Nights 2';
-			case 'assets.musicTracks.daydreams.title': return 'Daydreams';
-			case 'assets.musicTracks.daydreams.artist': return 'Purrple Cat';
-			case 'assets.musicTracks.strawberryLemonade.title': return 'Strawberry Lemonade';
-			case 'assets.musicTracks.strawberryLemonade.artist': return 'Purrple Cat';
-			case 'assets.musicTracks.greenTea.title': return 'Green Tea';
-			case 'assets.musicTracks.greenTea.artist': return 'Purrple Cat';
-			case 'assets.musicTracks.wishingWell.title': return 'Wishing Well';
-			case 'assets.musicTracks.wishingWell.artist': return 'Purrple Cat';
-			case 'assets.musicTracks.beautifulDay.title': return 'Beautiful Day';
-			case 'assets.musicTracks.beautifulDay.artist': return 'Purrple Cat';
-			case 'assets.musicTracks.missingYou.title': return 'Missing You';
-			case 'assets.musicTracks.missingYou.artist': return 'Purrple Cat';
-			case 'assets.musicTracks.fallingStar.title': return 'Falling Star';
-			case 'assets.musicTracks.fallingStar.artist': return 'Purrple Cat';
-			case 'assets.musicTracks.lonely.title': return 'Lonely';
-			case 'assets.musicTracks.lonely.artist': return 'Purrple Cat';
-			case 'assets.ambientSounds.rain.title': return 'Rain';
-			case 'assets.ambientSounds.birdChirp.title': return 'Bird Chirp';
-			case 'assets.ambientSounds.cricket.title': return 'Cricket';
-			case 'assets.ambientSounds.owlHoot.title': return 'Owl Hoot';
-			case 'assets.ambientSounds.pencilWrite.title': return 'Pencil Write';
-			case 'assets.ambientSounds.thunder.title': return 'Thunder';
-			default: return null;
-		}
-	}
+// Path: settings.groups.general
+class TranslationsSettingsGroupsGeneralEnUs {
+	TranslationsSettingsGroupsGeneralEnUs.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en-US: 'General'
+	String get title => 'General';
+
+	/// en-US: 'Language'
+	String get language => 'Language';
+
+	/// en-US: 'Theme'
+	String get theme => 'Theme';
 }
 
+// Path: settings.groups.appearance
+class TranslationsSettingsGroupsAppearanceEnUs {
+	TranslationsSettingsGroupsAppearanceEnUs.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en-US: 'Appearance'
+	String get title => 'Appearance';
+
+	late final TranslationsSettingsGroupsAppearanceThemeModeEnUs themeMode = TranslationsSettingsGroupsAppearanceThemeModeEnUs.internal(_root);
+	late final TranslationsSettingsGroupsAppearancePomodoroStyleEnUs pomodoroStyle = TranslationsSettingsGroupsAppearancePomodoroStyleEnUs.internal(_root);
+}
+
+// Path: settings.groups.about
+class TranslationsSettingsGroupsAboutEnUs {
+	TranslationsSettingsGroupsAboutEnUs.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en-US: 'About'
+	String get title => 'About';
+
+	/// en-US: 'Project Page'
+	String get page => 'Project Page';
+
+	/// en-US: 'GitHub Repository'
+	String get gitHub => 'GitHub Repository';
+
+	/// en-US: 'Contact via Email'
+	String get email => 'Contact via Email';
+}
+
+// Path: settings.groups.appearance.themeMode
+class TranslationsSettingsGroupsAppearanceThemeModeEnUs {
+	TranslationsSettingsGroupsAppearanceThemeModeEnUs.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en-US: 'Theme Mode'
+	String get title => 'Theme Mode';
+
+	/// en-US: 'Light Mode'
+	String get light => 'Light Mode';
+
+	/// en-US: 'Dark Mode'
+	String get dark => 'Dark Mode';
+
+	/// en-US: 'Sync with System'
+	String get system => 'Sync with System';
+}
+
+// Path: settings.groups.appearance.pomodoroStyle
+class TranslationsSettingsGroupsAppearancePomodoroStyleEnUs {
+	TranslationsSettingsGroupsAppearancePomodoroStyleEnUs.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en-US: 'Pomodoro Style'
+	String get title => 'Pomodoro Style';
+
+	/// en-US: 'Current Time'
+	String get currentTime => 'Current Time';
+
+	/// en-US: 'Countdown Timer'
+	String get countdownTimer => 'Countdown Timer';
+
+	/// en-US: 'Progress Bar'
+	String get progressBar => 'Progress Bar';
+
+	/// en-US: 'Breathing Ball'
+	String get breathingBall => 'Breathing Ball';
+}
