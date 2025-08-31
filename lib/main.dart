@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:minova/common/theme/theme.dart';
@@ -26,6 +27,8 @@ class MinovaApp extends ConsumerWidget {
       debugShowCheckedModeBanner: false,
       title: t.app.title,
       locale: locale,
+      supportedLocales: AppLocaleUtils.supportedLocales,
+      localizationsDelegates: GlobalMaterialLocalizations.delegates,
       theme: minovaLightTheme,
       darkTheme: minovaDarkTheme,
       themeMode: ThemeMode.system,
