@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:minova/common/theme/theme.dart';
+import 'package:minova/core/providers/language_provider.dart';
 import 'package:minova/gen/strings.g.dart';
 import 'package:minova/features/settings/screens/settings_screen.dart';
 
-void main() {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  LocaleSettings.useDeviceLocale();
+
+  await Hive.initFlutter();
+  await Hive.openBox('settings');
+
   runApp(ProviderScope(child: TranslationProvider(child: const MinovaApp())));
 }
 
@@ -15,9 +20,12 @@ class MinovaApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final locale = ref.watch(currentLocaleProvider);
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: t.app.title,
+      locale: locale,
       theme: minovaLightTheme,
       darkTheme: minovaDarkTheme,
       themeMode: ThemeMode.system,

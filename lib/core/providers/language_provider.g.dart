@@ -6,20 +6,20 @@ part of 'language_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$currentLocaleHash() => r'7bd8263019c7fa3ed352963795b4bfbc2005a7e2';
+String _$currentLocaleHash() => r'79ef970b254bbabeefaeb29d6e7092026a823ed7';
 
 /// See also [CurrentLocale].
 @ProviderFor(CurrentLocale)
 final currentLocaleProvider =
     AutoDisposeNotifierProvider<CurrentLocale, Locale>.internal(
-      CurrentLocale.new,
-      name: r'currentLocaleProvider',
-      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-          ? null
-          : _$currentLocaleHash,
-      dependencies: null,
-      allTransitiveDependencies: null,
-    );
+  CurrentLocale.new,
+  name: r'currentLocaleProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$currentLocaleHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
 
 typedef _$CurrentLocale = AutoDisposeNotifier<Locale>;
 // ignore_for_file: type=lint
