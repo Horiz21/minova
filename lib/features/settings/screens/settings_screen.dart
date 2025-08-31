@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:minova/core/providers/language_provider.dart';
+import 'package:minova/core/providers/theme_provider.dart';
 import 'package:minova/gen/strings.g.dart';
 import 'package:minova/gen/language_constants.g.dart';
 
@@ -11,6 +12,7 @@ class SettingsScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final t = Translations.of(context);
     final currentLanguageName = t.meta.languageName;
+    final currentThemeMode = ref.watch(appThemeModeProvider);
 
     return Scaffold(
       appBar: AppBar(title: Text(t.settings.title)),
@@ -37,8 +39,12 @@ class SettingsScreen extends ConsumerWidget {
                   icon: const Icon(Icons.brightness_auto_outlined),
                 ),
               ],
-              selected: const <ThemeMode>{ThemeMode.system},
-              onSelectionChanged: null,
+              selected: <ThemeMode>{currentThemeMode},
+              onSelectionChanged: (Set<ThemeMode> newSelection) {
+                ref
+                    .read(appThemeModeProvider.notifier)
+                    .setThemeMode(newSelection.first);
+              },
               style: ButtonStyle(
                 tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                 visualDensity: VisualDensity.adaptivePlatformDensity,
