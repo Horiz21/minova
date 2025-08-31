@@ -3,7 +3,7 @@ meta:
   languageName: 中文
   regionName: 中国大陆
   created: '2025-07-15'
-  updated: '2025-08-30'
+  updated: '2025-08-31'
 
 # Application title and slogan
 app:
@@ -26,15 +26,20 @@ settings:
       title: 通用
       language: 语言
       theme: 主题
-    appearance:
-      title: 外观
       themeMode:
         title: 主题模式
         light: 浅色模式
         dark: 深色模式
         system: 同步系统
-      pomodoroStyle:
-        title: 番茄钟样式
+    pomodoro:
+      title: 番茄钟
+      durations:
+        title: 时长
+        focus: 专注时长
+        shortBreak: 短休息时长
+        longBreak: 长休息时长
+      style:
+        title: 样式
         currentTime: 当前时间
         countdownTimer: 倒计时
         progressBar: 进度环

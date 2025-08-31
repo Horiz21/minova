@@ -61,8 +61,8 @@ class TranslationsMetaEnUs {
 	/// en-US: '2025-07-15'
 	String get created => '2025-07-15';
 
-	/// en-US: '2025-08-30'
-	String get updated => '2025-08-30';
+	/// en-US: '2025-08-31'
+	String get updated => '2025-08-31';
 }
 
 // Path: app
@@ -201,7 +201,7 @@ class TranslationsSettingsGroupsEnUs {
 
 	// Translations
 	late final TranslationsSettingsGroupsGeneralEnUs general = TranslationsSettingsGroupsGeneralEnUs.internal(_root);
-	late final TranslationsSettingsGroupsAppearanceEnUs appearance = TranslationsSettingsGroupsAppearanceEnUs.internal(_root);
+	late final TranslationsSettingsGroupsPomodoroEnUs pomodoro = TranslationsSettingsGroupsPomodoroEnUs.internal(_root);
 	late final TranslationsSettingsGroupsAboutEnUs about = TranslationsSettingsGroupsAboutEnUs.internal(_root);
 }
 
@@ -542,21 +542,23 @@ class TranslationsSettingsGroupsGeneralEnUs {
 
 	/// en-US: 'Theme'
 	String get theme => 'Theme';
+
+	late final TranslationsSettingsGroupsGeneralThemeModeEnUs themeMode = TranslationsSettingsGroupsGeneralThemeModeEnUs.internal(_root);
 }
 
-// Path: settings.groups.appearance
-class TranslationsSettingsGroupsAppearanceEnUs {
-	TranslationsSettingsGroupsAppearanceEnUs.internal(this._root);
+// Path: settings.groups.pomodoro
+class TranslationsSettingsGroupsPomodoroEnUs {
+	TranslationsSettingsGroupsPomodoroEnUs.internal(this._root);
 
 	final Translations _root; // ignore: unused_field
 
 	// Translations
 
-	/// en-US: 'Appearance'
-	String get title => 'Appearance';
+	/// en-US: 'Pomodoro'
+	String get title => 'Pomodoro';
 
-	late final TranslationsSettingsGroupsAppearanceThemeModeEnUs themeMode = TranslationsSettingsGroupsAppearanceThemeModeEnUs.internal(_root);
-	late final TranslationsSettingsGroupsAppearancePomodoroStyleEnUs pomodoroStyle = TranslationsSettingsGroupsAppearancePomodoroStyleEnUs.internal(_root);
+	late final TranslationsSettingsGroupsPomodoroDurationsEnUs durations = TranslationsSettingsGroupsPomodoroDurationsEnUs.internal(_root);
+	late final TranslationsSettingsGroupsPomodoroStyleEnUs style = TranslationsSettingsGroupsPomodoroStyleEnUs.internal(_root);
 }
 
 // Path: settings.groups.about
@@ -580,9 +582,9 @@ class TranslationsSettingsGroupsAboutEnUs {
 	String get email => 'Contact via Email';
 }
 
-// Path: settings.groups.appearance.themeMode
-class TranslationsSettingsGroupsAppearanceThemeModeEnUs {
-	TranslationsSettingsGroupsAppearanceThemeModeEnUs.internal(this._root);
+// Path: settings.groups.general.themeMode
+class TranslationsSettingsGroupsGeneralThemeModeEnUs {
+	TranslationsSettingsGroupsGeneralThemeModeEnUs.internal(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -601,16 +603,37 @@ class TranslationsSettingsGroupsAppearanceThemeModeEnUs {
 	String get system => 'Sync with System';
 }
 
-// Path: settings.groups.appearance.pomodoroStyle
-class TranslationsSettingsGroupsAppearancePomodoroStyleEnUs {
-	TranslationsSettingsGroupsAppearancePomodoroStyleEnUs.internal(this._root);
+// Path: settings.groups.pomodoro.durations
+class TranslationsSettingsGroupsPomodoroDurationsEnUs {
+	TranslationsSettingsGroupsPomodoroDurationsEnUs.internal(this._root);
 
 	final Translations _root; // ignore: unused_field
 
 	// Translations
 
-	/// en-US: 'Pomodoro Style'
-	String get title => 'Pomodoro Style';
+	/// en-US: 'Durations'
+	String get title => 'Durations';
+
+	/// en-US: 'Focus Duration'
+	String get focus => 'Focus Duration';
+
+	/// en-US: 'Short Break Duration'
+	String get shortBreak => 'Short Break Duration';
+
+	/// en-US: 'Long Break Duration'
+	String get longBreak => 'Long Break Duration';
+}
+
+// Path: settings.groups.pomodoro.style
+class TranslationsSettingsGroupsPomodoroStyleEnUs {
+	TranslationsSettingsGroupsPomodoroStyleEnUs.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en-US: 'Style'
+	String get title => 'Style';
 
 	/// en-US: 'Current Time'
 	String get currentTime => 'Current Time';

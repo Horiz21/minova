@@ -52,7 +52,7 @@ class _TranslationsMetaZhCn extends TranslationsMetaEnUs {
 	@override String get languageName => '中文';
 	@override String get regionName => '中国大陆';
 	@override String get created => '2025-07-15';
-	@override String get updated => '2025-08-30';
+	@override String get updated => '2025-08-31';
 }
 
 // Path: app
@@ -149,7 +149,7 @@ class _TranslationsSettingsGroupsZhCn extends TranslationsSettingsGroupsEnUs {
 
 	// Translations
 	@override late final _TranslationsSettingsGroupsGeneralZhCn general = _TranslationsSettingsGroupsGeneralZhCn._(_root);
-	@override late final _TranslationsSettingsGroupsAppearanceZhCn appearance = _TranslationsSettingsGroupsAppearanceZhCn._(_root);
+	@override late final _TranslationsSettingsGroupsPomodoroZhCn pomodoro = _TranslationsSettingsGroupsPomodoroZhCn._(_root);
 	@override late final _TranslationsSettingsGroupsAboutZhCn about = _TranslationsSettingsGroupsAboutZhCn._(_root);
 }
 
@@ -264,18 +264,19 @@ class _TranslationsSettingsGroupsGeneralZhCn extends TranslationsSettingsGroupsG
 	@override String get title => '通用';
 	@override String get language => '语言';
 	@override String get theme => '主题';
+	@override late final _TranslationsSettingsGroupsGeneralThemeModeZhCn themeMode = _TranslationsSettingsGroupsGeneralThemeModeZhCn._(_root);
 }
 
-// Path: settings.groups.appearance
-class _TranslationsSettingsGroupsAppearanceZhCn extends TranslationsSettingsGroupsAppearanceEnUs {
-	_TranslationsSettingsGroupsAppearanceZhCn._(TranslationsZhCn root) : this._root = root, super.internal(root);
+// Path: settings.groups.pomodoro
+class _TranslationsSettingsGroupsPomodoroZhCn extends TranslationsSettingsGroupsPomodoroEnUs {
+	_TranslationsSettingsGroupsPomodoroZhCn._(TranslationsZhCn root) : this._root = root, super.internal(root);
 
 	final TranslationsZhCn _root; // ignore: unused_field
 
 	// Translations
-	@override String get title => '外观';
-	@override late final _TranslationsSettingsGroupsAppearanceThemeModeZhCn themeMode = _TranslationsSettingsGroupsAppearanceThemeModeZhCn._(_root);
-	@override late final _TranslationsSettingsGroupsAppearancePomodoroStyleZhCn pomodoroStyle = _TranslationsSettingsGroupsAppearancePomodoroStyleZhCn._(_root);
+	@override String get title => '番茄钟';
+	@override late final _TranslationsSettingsGroupsPomodoroDurationsZhCn durations = _TranslationsSettingsGroupsPomodoroDurationsZhCn._(_root);
+	@override late final _TranslationsSettingsGroupsPomodoroStyleZhCn style = _TranslationsSettingsGroupsPomodoroStyleZhCn._(_root);
 }
 
 // Path: settings.groups.about
@@ -288,12 +289,12 @@ class _TranslationsSettingsGroupsAboutZhCn extends TranslationsSettingsGroupsAbo
 	@override String get title => '关于';
 	@override String get page => '项目主页';
 	@override String get gitHub => 'GitHub 仓库';
-	@override String get email => '联系邮箱';
+	@override String get email => '联系邮箱flutter pub run build_runner build';
 }
 
-// Path: settings.groups.appearance.themeMode
-class _TranslationsSettingsGroupsAppearanceThemeModeZhCn extends TranslationsSettingsGroupsAppearanceThemeModeEnUs {
-	_TranslationsSettingsGroupsAppearanceThemeModeZhCn._(TranslationsZhCn root) : this._root = root, super.internal(root);
+// Path: settings.groups.general.themeMode
+class _TranslationsSettingsGroupsGeneralThemeModeZhCn extends TranslationsSettingsGroupsGeneralThemeModeEnUs {
+	_TranslationsSettingsGroupsGeneralThemeModeZhCn._(TranslationsZhCn root) : this._root = root, super.internal(root);
 
 	final TranslationsZhCn _root; // ignore: unused_field
 
@@ -304,14 +305,27 @@ class _TranslationsSettingsGroupsAppearanceThemeModeZhCn extends TranslationsSet
 	@override String get system => '同步系统';
 }
 
-// Path: settings.groups.appearance.pomodoroStyle
-class _TranslationsSettingsGroupsAppearancePomodoroStyleZhCn extends TranslationsSettingsGroupsAppearancePomodoroStyleEnUs {
-	_TranslationsSettingsGroupsAppearancePomodoroStyleZhCn._(TranslationsZhCn root) : this._root = root, super.internal(root);
+// Path: settings.groups.pomodoro.durations
+class _TranslationsSettingsGroupsPomodoroDurationsZhCn extends TranslationsSettingsGroupsPomodoroDurationsEnUs {
+	_TranslationsSettingsGroupsPomodoroDurationsZhCn._(TranslationsZhCn root) : this._root = root, super.internal(root);
 
 	final TranslationsZhCn _root; // ignore: unused_field
 
 	// Translations
-	@override String get title => '番茄钟样式';
+	@override String get title => '时长';
+	@override String get focus => '专注时长';
+	@override String get shortBreak => '短休息时长';
+	@override String get longBreak => '长休息时长';
+}
+
+// Path: settings.groups.pomodoro.style
+class _TranslationsSettingsGroupsPomodoroStyleZhCn extends TranslationsSettingsGroupsPomodoroStyleEnUs {
+	_TranslationsSettingsGroupsPomodoroStyleZhCn._(TranslationsZhCn root) : this._root = root, super.internal(root);
+
+	final TranslationsZhCn _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => '样式';
 	@override String get currentTime => '当前时间';
 	@override String get countdownTimer => '倒计时';
 	@override String get progressBar => '进度环';

@@ -3,7 +3,7 @@ meta:
   languageName: English
   regionName: United States
   created: '2025-07-15'
-  updated: '2025-08-30'
+  updated: '2025-08-31'
 
 # Application title and slogan
 app:
@@ -26,15 +26,20 @@ settings:
       title: General
       language: Language
       theme: Theme
-    appearance:
-      title: Appearance
       themeMode:
         title: Theme Mode
         light: Light Mode
         dark: Dark Mode
         system: Sync with System
-      pomodoroStyle:
-        title: Pomodoro Style
+    pomodoro:
+      title: Pomodoro
+      durations:
+        title: Durations
+        focus: Focus Duration
+        shortBreak: Short Break Duration
+        longBreak: Long Break Duration
+      style:
+        title: Style
         currentTime: Current Time
         countdownTimer: Countdown Timer
         progressBar: Progress Bar
