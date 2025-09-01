@@ -25,7 +25,8 @@ settings:
     general:
       title: General
       language: Language
-      theme: Theme
+      themeColor:
+        title: Theme Color
       themeMode:
         title: Theme Mode
         light: Light Mode
@@ -49,6 +50,15 @@ settings:
       page: Project Page
       gitHub: GitHub Repository
       email: Contact via Email
+
+# Theme colors in the settings screen
+themeColors:
+  graphite: Graphite
+  everflame: Everflame
+  abyssal: Abyssal
+  verdant: Verdant
+  earthen: Earthen
+  twilight: Twilight
 
 # Labels in the pomodoro screen (main screen)
 pomodoro:

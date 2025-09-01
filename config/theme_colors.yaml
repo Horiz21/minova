@@ -1,0 +1,13 @@
+colors:
+- id: graphite
+  hex: '#4A4E5A'
+- id: everflame
+  hex: '#B74D4D'
+- id: abyssal
+  hex: '#3B5B7D'
+- id: verdant
+  hex: '#3C6E47'
+- id: earthen
+  hex: '#7D6B58'
+- id: twilight
+  hex: '#6D5B7D'

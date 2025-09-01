@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:minova/common/theme/theme.dart';
+import 'package:minova/core/utils/theme_utils.dart';
 import 'package:minova/core/providers/language_provider.dart';
 import 'package:minova/core/providers/theme_provider.dart';
 import 'package:minova/gen/strings.g.dart';
@@ -24,6 +24,7 @@ class MinovaApp extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final locale = ref.watch(currentLocaleProvider);
     final themeMode = ref.watch(appThemeModeProvider);
+    final themeColor = ref.watch(appThemeColorProvider);
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -31,8 +32,8 @@ class MinovaApp extends ConsumerWidget {
       locale: locale,
       supportedLocales: AppLocaleUtils.supportedLocales,
       localizationsDelegates: GlobalMaterialLocalizations.delegates,
-      theme: minovaLightTheme,
-      darkTheme: minovaDarkTheme,
+      theme: generateTheme(Brightness.light, themeColor.color),
+      darkTheme: generateTheme(Brightness.dark, themeColor.color),
       themeMode: themeMode,
       home: const MinovaHomePage(),
     );

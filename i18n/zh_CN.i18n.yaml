@@ -25,7 +25,8 @@ settings:
     general:
       title: 通用
       language: 语言
-      theme: 主题
+      themeColor:
+        title: 主题颜色
       themeMode:
         title: 主题模式
         light: 浅色模式
@@ -49,6 +50,15 @@ settings:
       page: 项目主页
       gitHub: GitHub 仓库
       email: 联系邮箱
+
+# Theme colors in the settings screen
+themeColors:
+  graphite: 石墨
+  everflame: 永昼
+  abyssal: 鲸落
+  verdant: 苍苔
+  earthen: 沉香
+  twilight: 暮色
 
 # Labels in the pomodoro screen (main screen)
 pomodoro:

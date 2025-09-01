@@ -36,6 +36,14 @@ class TranslationsZhCn extends Translations {
 	@override late final _TranslationsAppZhCn app = _TranslationsAppZhCn._(_root);
 	@override late final _TranslationsCommonZhCn common = _TranslationsCommonZhCn._(_root);
 	@override late final _TranslationsSettingsZhCn settings = _TranslationsSettingsZhCn._(_root);
+	@override Map<String, String> get themeColors => {
+		'graphite': '石墨',
+		'everflame': '永昼',
+		'abyssal': '鲸落',
+		'verdant': '苍苔',
+		'earthen': '沉香',
+		'twilight': '暮色',
+	};
 	@override late final _TranslationsPomodoroZhCn pomodoro = _TranslationsPomodoroZhCn._(_root);
 	@override late final _TranslationsMusicPlayerZhCn musicPlayer = _TranslationsMusicPlayerZhCn._(_root);
 	@override late final _TranslationsSoundMixerZhCn soundMixer = _TranslationsSoundMixerZhCn._(_root);
@@ -263,7 +271,7 @@ class _TranslationsSettingsGroupsGeneralZhCn extends TranslationsSettingsGroupsG
 	// Translations
 	@override String get title => '通用';
 	@override String get language => '语言';
-	@override String get theme => '主题';
+	@override late final _TranslationsSettingsGroupsGeneralThemeColorZhCn themeColor = _TranslationsSettingsGroupsGeneralThemeColorZhCn._(_root);
 	@override late final _TranslationsSettingsGroupsGeneralThemeModeZhCn themeMode = _TranslationsSettingsGroupsGeneralThemeModeZhCn._(_root);
 }
 
@@ -289,7 +297,17 @@ class _TranslationsSettingsGroupsAboutZhCn extends TranslationsSettingsGroupsAbo
 	@override String get title => '关于';
 	@override String get page => '项目主页';
 	@override String get gitHub => 'GitHub 仓库';
-	@override String get email => '联系邮箱flutter pub run build_runner build';
+	@override String get email => '联系邮箱';
+}
+
+// Path: settings.groups.general.themeColor
+class _TranslationsSettingsGroupsGeneralThemeColorZhCn extends TranslationsSettingsGroupsGeneralThemeColorEnUs {
+	_TranslationsSettingsGroupsGeneralThemeColorZhCn._(TranslationsZhCn root) : this._root = root, super.internal(root);
+
+	final TranslationsZhCn _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => '主题颜色';
 }
 
 // Path: settings.groups.general.themeMode

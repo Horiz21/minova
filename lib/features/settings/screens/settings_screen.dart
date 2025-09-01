@@ -4,6 +4,7 @@ import 'package:minova/core/providers/language_provider.dart';
 import 'package:minova/core/providers/theme_provider.dart';
 import 'package:minova/gen/strings.g.dart';
 import 'package:minova/gen/language_constants.g.dart';
+import 'package:minova/gen/theme_constants.g.dart';
 
 class SettingsScreen extends ConsumerWidget {
   const SettingsScreen({super.key});
@@ -13,6 +14,7 @@ class SettingsScreen extends ConsumerWidget {
     final t = Translations.of(context);
     final currentLanguageName = t.meta.languageName;
     final currentThemeMode = ref.watch(appThemeModeProvider);
+    final currentThemeColor = ref.watch(appThemeColorProvider);
 
     return Scaffold(
       appBar: AppBar(title: Text(t.settings.title)),
@@ -53,9 +55,10 @@ class SettingsScreen extends ConsumerWidget {
             ),
           ),
           ListTile(
-            title: Text(t.settings.groups.general.theme),
+            title: Text(t.settings.groups.general.themeColor.title),
+            subtitle: Text(t.themeColors[currentThemeColor.id]!),
             trailing: const Icon(Icons.color_lens_outlined),
-            onTap: null,
+            onTap: () => _showColorPickerDialog(context, ref),
           ),
           ListTile(
             title: Text(t.settings.groups.general.language),
@@ -120,9 +123,7 @@ void _showLanguageDialog(BuildContext context, WidgetRef ref) {
 
               return ListTile(
                 title: Text(langName['languageName']!),
-                trailing: isSelected
-                    ? Icon(Icons.check, color: Theme.of(context).primaryColor)
-                    : null,
+                trailing: isSelected ? Icon(Icons.check) : null,
                 onTap: () {
                   final codeParts = langCode.split('_');
                   final newLocale = Locale(
@@ -141,6 +142,55 @@ void _showLanguageDialog(BuildContext context, WidgetRef ref) {
         actions: [
           TextButton(
             onPressed: () => Navigator.of(dialogContext).pop(),
+            child: Text(t.common.cancel),
+          ),
+        ],
+      );
+    },
+  );
+}
+
+void _showColorPickerDialog(BuildContext context, WidgetRef ref) {
+  final currentColor = ref.read(appThemeColorProvider);
+
+  showDialog(
+    context: context,
+    builder: (context) {
+      return AlertDialog(
+        title: Text(t.settings.groups.general.themeColor.title),
+        contentPadding: const EdgeInsets.fromLTRB(16, 20, 16, 0),
+        content: SizedBox(
+          width: double.maxFinite,
+          child: Wrap(
+            spacing: 12.0,
+            runSpacing: 12.0,
+            children: kAppThemeColors.values.map((themeInfo) {
+              final isSelected = currentColor.id == themeInfo.id;
+              final colorDisplayName = t.themeColors[themeInfo.id]!;
+              return ListTile(
+                leading: Container(
+                  width: 36,
+                  height: 36,
+                  decoration: BoxDecoration(
+                    color: themeInfo.color,
+                    shape: BoxShape.circle,
+                  ),
+                ),
+                title: Text(colorDisplayName),
+                trailing: isSelected ? const Icon(Icons.check) : null,
+                onTap: () {
+                  ref
+                      .read(appThemeColorProvider.notifier)
+                      .setThemeColor(themeInfo.id, themeInfo.color);
+                  Navigator.of(context).pop();
+                },
+              );
+            }).toList(),
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
             child: Text(t.common.cancel),
           ),
         ],

@@ -38,6 +38,14 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	late final TranslationsAppEnUs app = TranslationsAppEnUs.internal(_root);
 	late final TranslationsCommonEnUs common = TranslationsCommonEnUs.internal(_root);
 	late final TranslationsSettingsEnUs settings = TranslationsSettingsEnUs.internal(_root);
+	Map<String, String> get themeColors => {
+		'graphite': 'Graphite',
+		'everflame': 'Everflame',
+		'abyssal': 'Abyssal',
+		'verdant': 'Verdant',
+		'earthen': 'Earthen',
+		'twilight': 'Twilight',
+	};
 	late final TranslationsPomodoroEnUs pomodoro = TranslationsPomodoroEnUs.internal(_root);
 	late final TranslationsMusicPlayerEnUs musicPlayer = TranslationsMusicPlayerEnUs.internal(_root);
 	late final TranslationsSoundMixerEnUs soundMixer = TranslationsSoundMixerEnUs.internal(_root);
@@ -540,9 +548,7 @@ class TranslationsSettingsGroupsGeneralEnUs {
 	/// en-US: 'Language'
 	String get language => 'Language';
 
-	/// en-US: 'Theme'
-	String get theme => 'Theme';
-
+	late final TranslationsSettingsGroupsGeneralThemeColorEnUs themeColor = TranslationsSettingsGroupsGeneralThemeColorEnUs.internal(_root);
 	late final TranslationsSettingsGroupsGeneralThemeModeEnUs themeMode = TranslationsSettingsGroupsGeneralThemeModeEnUs.internal(_root);
 }
 
@@ -580,6 +586,18 @@ class TranslationsSettingsGroupsAboutEnUs {
 
 	/// en-US: 'Contact via Email'
 	String get email => 'Contact via Email';
+}
+
+// Path: settings.groups.general.themeColor
+class TranslationsSettingsGroupsGeneralThemeColorEnUs {
+	TranslationsSettingsGroupsGeneralThemeColorEnUs.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en-US: 'Theme Color'
+	String get title => 'Theme Color';
 }
 
 // Path: settings.groups.general.themeMode
