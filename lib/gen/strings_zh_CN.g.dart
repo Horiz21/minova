@@ -36,6 +36,11 @@ class TranslationsZhCn extends Translations {
 	@override late final _TranslationsAppZhCn app = _TranslationsAppZhCn._(_root);
 	@override late final _TranslationsCommonZhCn common = _TranslationsCommonZhCn._(_root);
 	@override late final _TranslationsSettingsZhCn settings = _TranslationsSettingsZhCn._(_root);
+	@override Map<String, String> get themeModes => {
+		'light': '浅色模式',
+		'dark': '深色模式',
+		'system': '同步系统',
+	};
 	@override Map<String, String> get themeColors => {
 		'graphite': '石墨',
 		'everflame': '永昼',
@@ -271,8 +276,8 @@ class _TranslationsSettingsGroupsGeneralZhCn extends TranslationsSettingsGroupsG
 	// Translations
 	@override String get title => '通用';
 	@override String get language => '语言';
-	@override late final _TranslationsSettingsGroupsGeneralThemeColorZhCn themeColor = _TranslationsSettingsGroupsGeneralThemeColorZhCn._(_root);
-	@override late final _TranslationsSettingsGroupsGeneralThemeModeZhCn themeMode = _TranslationsSettingsGroupsGeneralThemeModeZhCn._(_root);
+	@override String get themeColor => '主题颜色';
+	@override String get themeMode => '主题模式';
 }
 
 // Path: settings.groups.pomodoro
@@ -298,29 +303,6 @@ class _TranslationsSettingsGroupsAboutZhCn extends TranslationsSettingsGroupsAbo
 	@override String get page => '项目主页';
 	@override String get gitHub => 'GitHub 仓库';
 	@override String get email => '联系邮箱';
-}
-
-// Path: settings.groups.general.themeColor
-class _TranslationsSettingsGroupsGeneralThemeColorZhCn extends TranslationsSettingsGroupsGeneralThemeColorEnUs {
-	_TranslationsSettingsGroupsGeneralThemeColorZhCn._(TranslationsZhCn root) : this._root = root, super.internal(root);
-
-	final TranslationsZhCn _root; // ignore: unused_field
-
-	// Translations
-	@override String get title => '主题颜色';
-}
-
-// Path: settings.groups.general.themeMode
-class _TranslationsSettingsGroupsGeneralThemeModeZhCn extends TranslationsSettingsGroupsGeneralThemeModeEnUs {
-	_TranslationsSettingsGroupsGeneralThemeModeZhCn._(TranslationsZhCn root) : this._root = root, super.internal(root);
-
-	final TranslationsZhCn _root; // ignore: unused_field
-
-	// Translations
-	@override String get title => '主题模式';
-	@override String get light => '浅色模式';
-	@override String get dark => '深色模式';
-	@override String get system => '同步系统';
 }
 
 // Path: settings.groups.pomodoro.durations

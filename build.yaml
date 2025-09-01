@@ -13,4 +13,5 @@ targets:
           - assets.musicTracks
           - assets.albums
           - assets.ambientSounds
+          - themeModes
           - themeColors

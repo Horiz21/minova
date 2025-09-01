@@ -38,6 +38,11 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	late final TranslationsAppEnUs app = TranslationsAppEnUs.internal(_root);
 	late final TranslationsCommonEnUs common = TranslationsCommonEnUs.internal(_root);
 	late final TranslationsSettingsEnUs settings = TranslationsSettingsEnUs.internal(_root);
+	Map<String, String> get themeModes => {
+		'light': 'Light Mode',
+		'dark': 'Dark Mode',
+		'system': 'Sync with System',
+	};
 	Map<String, String> get themeColors => {
 		'graphite': 'Graphite',
 		'everflame': 'Everflame',
@@ -548,8 +553,11 @@ class TranslationsSettingsGroupsGeneralEnUs {
 	/// en-US: 'Language'
 	String get language => 'Language';
 
-	late final TranslationsSettingsGroupsGeneralThemeColorEnUs themeColor = TranslationsSettingsGroupsGeneralThemeColorEnUs.internal(_root);
-	late final TranslationsSettingsGroupsGeneralThemeModeEnUs themeMode = TranslationsSettingsGroupsGeneralThemeModeEnUs.internal(_root);
+	/// en-US: 'Theme Color'
+	String get themeColor => 'Theme Color';
+
+	/// en-US: 'Theme Mode'
+	String get themeMode => 'Theme Mode';
 }
 
 // Path: settings.groups.pomodoro
@@ -586,39 +594,6 @@ class TranslationsSettingsGroupsAboutEnUs {
 
 	/// en-US: 'Contact via Email'
 	String get email => 'Contact via Email';
-}
-
-// Path: settings.groups.general.themeColor
-class TranslationsSettingsGroupsGeneralThemeColorEnUs {
-	TranslationsSettingsGroupsGeneralThemeColorEnUs.internal(this._root);
-
-	final Translations _root; // ignore: unused_field
-
-	// Translations
-
-	/// en-US: 'Theme Color'
-	String get title => 'Theme Color';
-}
-
-// Path: settings.groups.general.themeMode
-class TranslationsSettingsGroupsGeneralThemeModeEnUs {
-	TranslationsSettingsGroupsGeneralThemeModeEnUs.internal(this._root);
-
-	final Translations _root; // ignore: unused_field
-
-	// Translations
-
-	/// en-US: 'Theme Mode'
-	String get title => 'Theme Mode';
-
-	/// en-US: 'Light Mode'
-	String get light => 'Light Mode';
-
-	/// en-US: 'Dark Mode'
-	String get dark => 'Dark Mode';
-
-	/// en-US: 'Sync with System'
-	String get system => 'Sync with System';
 }
 
 // Path: settings.groups.pomodoro.durations

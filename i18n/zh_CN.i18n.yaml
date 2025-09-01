@@ -25,13 +25,8 @@ settings:
     general:
       title: 通用
       language: 语言
-      themeColor:
-        title: 主题颜色
-      themeMode:
-        title: 主题模式
-        light: 浅色模式
-        dark: 深色模式
-        system: 同步系统
+      themeColor: 主题颜色
+      themeMode: 主题模式
     pomodoro:
       title: 番茄钟
       durations:
@@ -51,7 +46,11 @@ settings:
       gitHub: GitHub 仓库
       email: 联系邮箱
 
-# Theme colors in the settings screen
+# Theme modes and theme colors in the settings screen
+themeModes:
+  light: 浅色模式
+  dark: 深色模式
+  system: 同步系统
 themeColors:
   graphite: 石墨
   everflame: 永昼

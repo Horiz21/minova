@@ -25,13 +25,8 @@ settings:
     general:
       title: General
       language: Language
-      themeColor:
-        title: Theme Color
-      themeMode:
-        title: Theme Mode
-        light: Light Mode
-        dark: Dark Mode
-        system: Sync with System
+      themeColor: Theme Color
+      themeMode: Theme Mode
     pomodoro:
       title: Pomodoro
       durations:
@@ -51,7 +46,11 @@ settings:
       gitHub: GitHub Repository
       email: Contact via Email
 
-# Theme colors in the settings screen
+# Theme modes and theme colors in the settings screen
+themeModes:
+  light: Light Mode
+  dark: Dark Mode
+  system: Sync with System
 themeColors:
   graphite: Graphite
   everflame: Everflame

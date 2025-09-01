@@ -22,40 +22,13 @@ class SettingsScreen extends ConsumerWidget {
         children: [
           _SectionHeader(title: t.settings.groups.general.title),
           ListTile(
-            title: Text(t.settings.groups.general.themeMode.title),
-            trailing: SegmentedButton<ThemeMode>(
-              segments: [
-                ButtonSegment(
-                  value: ThemeMode.light,
-                  label: Text(t.settings.groups.general.themeMode.light),
-                  icon: const Icon(Icons.light_mode_outlined),
-                ),
-                ButtonSegment(
-                  value: ThemeMode.dark,
-                  label: Text(t.settings.groups.general.themeMode.dark),
-                  icon: const Icon(Icons.dark_mode_outlined),
-                ),
-                ButtonSegment(
-                  value: ThemeMode.system,
-                  label: Text(t.settings.groups.general.themeMode.system),
-                  icon: const Icon(Icons.brightness_auto_outlined),
-                ),
-              ],
-              selected: <ThemeMode>{currentThemeMode},
-              onSelectionChanged: (Set<ThemeMode> newSelection) {
-                ref
-                    .read(appThemeModeProvider.notifier)
-                    .setThemeMode(newSelection.first);
-              },
-              style: ButtonStyle(
-                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                visualDensity: VisualDensity.adaptivePlatformDensity,
-              ),
-              showSelectedIcon: true,
-            ),
+            title: Text(t.settings.groups.general.themeMode),
+            subtitle: Text(t.themeModes[currentThemeMode.name]!),
+            trailing: const Icon(Icons.brightness_medium_outlined),
+            onTap: () => _showThemeModeDialog(context, ref),
           ),
           ListTile(
-            title: Text(t.settings.groups.general.themeColor.title),
+            title: Text(t.settings.groups.general.themeColor),
             subtitle: Text(t.themeColors[currentThemeColor.id]!),
             trailing: const Icon(Icons.color_lens_outlined),
             onTap: () => _showColorPickerDialog(context, ref),
@@ -103,6 +76,117 @@ class SettingsScreen extends ConsumerWidget {
   }
 }
 
+void _showThemeModeDialog(BuildContext context, WidgetRef ref) {
+  final t = Translations.of(context);
+  final currentThemeMode = ref.read(appThemeModeProvider);
+
+  final themeModes = [
+    {
+      'mode': ThemeMode.light,
+      'name': t.themeModes['light'],
+      'icon': Icons.light_mode_outlined,
+    },
+    {
+      'mode': ThemeMode.dark,
+      'name': t.themeModes['dark'],
+      'icon': Icons.dark_mode_outlined,
+    },
+    {
+      'mode': ThemeMode.system,
+      'name': t.themeModes['system'],
+      'icon': Icons.brightness_auto_outlined,
+    },
+  ];
+
+  showDialog(
+    context: context,
+    builder: (BuildContext dialogContext) {
+      return AlertDialog(
+        title: Text(t.settings.groups.general.themeMode),
+        content: SizedBox(
+          width: double.maxFinite,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: themeModes.map((item) {
+              final themeMode = item['mode'] as ThemeMode;
+              final themeName = item['name'] as String;
+              final themeIcon = item['icon'] as IconData;
+              final isSelected = currentThemeMode == themeMode;
+
+              return ListTile(
+                leading: Icon(themeIcon),
+                title: Text(themeName),
+                trailing: isSelected ? Icon(Icons.check) : null,
+                onTap: () {
+                  ref
+                      .read(appThemeModeProvider.notifier)
+                      .setThemeMode(themeMode);
+                  Navigator.of(dialogContext).pop();
+                },
+              );
+            }).toList(),
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(dialogContext).pop(),
+            child: Text(t.common.cancel),
+          ),
+        ],
+      );
+    },
+  );
+}
+
+void _showColorPickerDialog(BuildContext context, WidgetRef ref) {
+  final currentColor = ref.read(appThemeColorProvider);
+
+  showDialog(
+    context: context,
+    builder: (context) {
+      return AlertDialog(
+        title: Text(t.settings.groups.general.themeColor),
+        contentPadding: const EdgeInsets.fromLTRB(16, 20, 16, 0),
+        content: SizedBox(
+          width: double.maxFinite,
+          child: Wrap(
+            spacing: 12.0,
+            runSpacing: 12.0,
+            children: kAppThemeColors.values.map((themeInfo) {
+              final isSelected = currentColor.id == themeInfo.id;
+              final colorDisplayName = t.themeColors[themeInfo.id]!;
+              return ListTile(
+                leading: Container(
+                  width: 36,
+                  height: 36,
+                  decoration: BoxDecoration(
+                    color: themeInfo.color,
+                    shape: BoxShape.circle,
+                  ),
+                ),
+                title: Text(colorDisplayName),
+                trailing: isSelected ? const Icon(Icons.check) : null,
+                onTap: () {
+                  ref
+                      .read(appThemeColorProvider.notifier)
+                      .setThemeColor(themeInfo.id, themeInfo.color);
+                  Navigator.of(context).pop();
+                },
+              );
+            }).toList(),
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: Text(t.common.cancel),
+          ),
+        ],
+      );
+    },
+  );
+}
+
 void _showLanguageDialog(BuildContext context, WidgetRef ref) {
   final t = Translations.of(context);
   final currentLocale = ref.read(currentLocaleProvider);
@@ -142,55 +226,6 @@ void _showLanguageDialog(BuildContext context, WidgetRef ref) {
         actions: [
           TextButton(
             onPressed: () => Navigator.of(dialogContext).pop(),
-            child: Text(t.common.cancel),
-          ),
-        ],
-      );
-    },
-  );
-}
-
-void _showColorPickerDialog(BuildContext context, WidgetRef ref) {
-  final currentColor = ref.read(appThemeColorProvider);
-
-  showDialog(
-    context: context,
-    builder: (context) {
-      return AlertDialog(
-        title: Text(t.settings.groups.general.themeColor.title),
-        contentPadding: const EdgeInsets.fromLTRB(16, 20, 16, 0),
-        content: SizedBox(
-          width: double.maxFinite,
-          child: Wrap(
-            spacing: 12.0,
-            runSpacing: 12.0,
-            children: kAppThemeColors.values.map((themeInfo) {
-              final isSelected = currentColor.id == themeInfo.id;
-              final colorDisplayName = t.themeColors[themeInfo.id]!;
-              return ListTile(
-                leading: Container(
-                  width: 36,
-                  height: 36,
-                  decoration: BoxDecoration(
-                    color: themeInfo.color,
-                    shape: BoxShape.circle,
-                  ),
-                ),
-                title: Text(colorDisplayName),
-                trailing: isSelected ? const Icon(Icons.check) : null,
-                onTap: () {
-                  ref
-                      .read(appThemeColorProvider.notifier)
-                      .setThemeColor(themeInfo.id, themeInfo.color);
-                  Navigator.of(context).pop();
-                },
-              );
-            }).toList(),
-          ),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(),
             child: Text(t.common.cancel),
           ),
         ],
