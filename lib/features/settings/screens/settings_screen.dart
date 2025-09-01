@@ -5,6 +5,7 @@ import 'package:minova/core/providers/theme_provider.dart';
 import 'package:minova/gen/strings.g.dart';
 import 'package:minova/gen/language_constants.g.dart';
 import 'package:minova/gen/theme_constants.g.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SettingsScreen extends ConsumerWidget {
   const SettingsScreen({super.key});
@@ -15,6 +16,9 @@ class SettingsScreen extends ConsumerWidget {
     final currentLanguageName = t.meta.languageName;
     final currentThemeMode = ref.watch(appThemeModeProvider);
     final currentThemeColor = ref.watch(appThemeColorProvider);
+
+    final Uri githubUri = Uri.parse('https://github.com/Horiz21/minova');
+    final Uri emailUri = Uri(scheme: 'mailto', path: 'htl.me@outlook.com');
 
     return Scaffold(
       appBar: AppBar(title: Text(t.settings.title)),
@@ -55,20 +59,32 @@ class SettingsScreen extends ConsumerWidget {
           ),
 
           _SectionHeader(title: t.settings.groups.about.title),
-          ListTile(
-            title: Text(t.settings.groups.about.page),
-            trailing: const Icon(Icons.open_in_browser),
-            onTap: null,
-          ),
+          // ListTile(
+          //   title: Text(t.settings.groups.about.page),
+          //   trailing: const Icon(Icons.code),
+          //   onTap: null,
+          // ),
           ListTile(
             title: Text(t.settings.groups.about.gitHub),
-            trailing: const Icon(Icons.code),
-            onTap: null,
+            trailing: const Icon(Icons.open_in_browser),
+            onTap: () async {
+              if (await canLaunchUrl(githubUri)) {
+                await launchUrl(githubUri);
+              } else {
+                throw 'Could not launch $githubUri';
+              }
+            },
           ),
           ListTile(
             title: Text(t.settings.groups.about.email),
             trailing: const Icon(Icons.mail),
-            onTap: null,
+            onTap: () async {
+              if (await canLaunchUrl(emailUri)) {
+                await launchUrl(emailUri);
+              } else {
+                throw 'Could not launch $emailUri';
+              }
+            },
           ),
         ],
       ),
