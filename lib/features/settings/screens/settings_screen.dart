@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:minova/core/providers/language_provider.dart';
+import 'package:minova/core/providers/pomodoro_settings_provider.dart';
 import 'package:minova/core/providers/theme_provider.dart';
 import 'package:minova/gen/strings.g.dart';
 import 'package:minova/gen/language_constants.g.dart';
@@ -16,6 +17,7 @@ class SettingsScreen extends ConsumerWidget {
     final currentLanguageName = t.meta.languageName;
     final currentThemeMode = ref.watch(appThemeModeProvider);
     final currentThemeColor = ref.watch(appThemeColorProvider);
+    final currentPomodoroSettings = ref.watch(appPomodoroSettingsProvider);
 
     final Uri githubUri = Uri.parse('https://github.com/Horiz21/minova');
     final Uri emailUri = Uri(scheme: 'mailto', path: 'htl.me@outlook.com');
@@ -47,7 +49,11 @@ class SettingsScreen extends ConsumerWidget {
           _SectionHeader(title: t.settings.groups.pomodoro.title),
           ListTile(
             title: Text(t.settings.groups.pomodoro.durations.title),
-            subtitle: Text('TODO'), // TODO: show current durations
+            subtitle: Text(
+              "${currentPomodoroSettings.focusDuration}/"
+              "${currentPomodoroSettings.shortBreakDuration}/"
+              "${currentPomodoroSettings.longBreakDuration}",
+            ),
             trailing: const Icon(Icons.timelapse),
             onTap: null,
           ),

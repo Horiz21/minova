@@ -5,8 +5,8 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:minova/core/utils/theme_utils.dart';
 import 'package:minova/core/providers/language_provider.dart';
 import 'package:minova/core/providers/theme_provider.dart';
+import 'package:minova/features/pomodoro/screens/pomodoro_screen.dart';
 import 'package:minova/gen/strings.g.dart';
-import 'package:minova/features/settings/screens/settings_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -35,29 +35,7 @@ class MinovaApp extends ConsumerWidget {
       theme: generateTheme(Brightness.light, themeColor.color),
       darkTheme: generateTheme(Brightness.dark, themeColor.color),
       themeMode: themeMode,
-      home: const MinovaHomePage(),
-    );
-  }
-}
-
-class MinovaHomePage extends StatelessWidget {
-  const MinovaHomePage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          onPressed: () {
-            Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => const SettingsScreen()),
-            );
-          },
-          icon: Icon(Icons.settings),
-        ),
-        title: Text(t.app.title),
-      ),
-      body: Center(child: Text(t.app.slogan)),
+      home: const PomodoroScreen(),
     );
   }
 }

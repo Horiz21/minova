@@ -20,6 +20,7 @@ dependencies:
   hive: ^2.2.3
   hive_flutter: ^1.1.0
   url_launcher: ^6.3.2
+  intl: ^0.20.2
 
 dev_dependencies:
   flutter_test:
@@ -39,6 +40,10 @@ flutter:
   - assets/
   - assets/images/
   - i18n/
+  fonts:
+  - family: MartianMono
+    fonts:
+    - asset: assets/fonts/MartianMono-VariableFont_wdth,wght.ttf
 
 flutter_launcher_icons:
   image_path: "assets/images/icon.png"
