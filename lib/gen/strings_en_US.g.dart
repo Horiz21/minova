@@ -51,6 +51,13 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 		'earthen': 'Earthen',
 		'twilight': 'Twilight',
 	};
+	Map<String, String> get pomodoroStyles => {
+		'currentTime': 'Current Time',
+		'countdownTimer': 'Countdown Timer',
+		'progressBar': 'Progress Bar',
+		'breathingBall': 'Breathing Ball',
+		'blank': 'Blank',
+	};
 	late final TranslationsPomodoroEnUs pomodoro = TranslationsPomodoroEnUs.internal(_root);
 	late final TranslationsMusicPlayerEnUs musicPlayer = TranslationsMusicPlayerEnUs.internal(_root);
 	late final TranslationsSoundMixerEnUs soundMixer = TranslationsSoundMixerEnUs.internal(_root);
@@ -115,6 +122,12 @@ class TranslationsCommonEnUs {
 
 	/// en-US: 'Failed'
 	String get failed => 'Failed';
+
+	/// en-US: 'Reset to Default'
+	String get resetToDefault => 'Reset to Default';
+
+	/// en-US: 'Minute(s)'
+	String get minutes => 'Minute(s)';
 }
 
 // Path: settings
@@ -572,7 +585,15 @@ class TranslationsSettingsGroupsPomodoroEnUs {
 	String get title => 'Pomodoro';
 
 	late final TranslationsSettingsGroupsPomodoroDurationsEnUs durations = TranslationsSettingsGroupsPomodoroDurationsEnUs.internal(_root);
-	late final TranslationsSettingsGroupsPomodoroStyleEnUs style = TranslationsSettingsGroupsPomodoroStyleEnUs.internal(_root);
+
+	/// en-US: 'Cycles Before Long Break'
+	String get cyclesBeforeLongBreak => 'Cycles Before Long Break';
+
+	/// en-US: 'Auto Start Next Cycle'
+	String get autoStartNextCycle => 'Auto Start Next Cycle';
+
+	/// en-US: 'Style'
+	String get style => 'Style';
 }
 
 // Path: settings.groups.about
@@ -615,28 +636,4 @@ class TranslationsSettingsGroupsPomodoroDurationsEnUs {
 
 	/// en-US: 'Long Break Duration'
 	String get longBreak => 'Long Break Duration';
-}
-
-// Path: settings.groups.pomodoro.style
-class TranslationsSettingsGroupsPomodoroStyleEnUs {
-	TranslationsSettingsGroupsPomodoroStyleEnUs.internal(this._root);
-
-	final Translations _root; // ignore: unused_field
-
-	// Translations
-
-	/// en-US: 'Style'
-	String get title => 'Style';
-
-	/// en-US: 'Current Time'
-	String get currentTime => 'Current Time';
-
-	/// en-US: 'Countdown Timer'
-	String get countdownTimer => 'Countdown Timer';
-
-	/// en-US: 'Progress Bar'
-	String get progressBar => 'Progress Bar';
-
-	/// en-US: 'Breathing Ball'
-	String get breathingBall => 'Breathing Ball';
 }

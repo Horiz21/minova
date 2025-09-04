@@ -17,6 +17,8 @@ common:
   close: Close
   success: Success
   failed: Failed
+  resetToDefault: Reset to Default
+  minutes: Minute(s)
 
 # Labels and option titles in the settings screen
 settings:
@@ -34,12 +36,9 @@ settings:
         focus: Focus Duration
         shortBreak: Short Break Duration
         longBreak: Long Break Duration
-      style:
-        title: Style
-        currentTime: Current Time
-        countdownTimer: Countdown Timer
-        progressBar: Progress Bar
-        breathingBall: Breathing Ball
+      cyclesBeforeLongBreak: Cycles Before Long Break
+      autoStartNextCycle: Auto Start Next Cycle
+      style: Style
     about:
       title: About
       page: Project Page
@@ -58,6 +57,14 @@ themeColors:
   verdant: Verdant
   earthen: Earthen
   twilight: Twilight
+
+# Pomodoro styles in the settings screen
+pomodoroStyles:
+  currentTime: Current Time
+  countdownTimer: Countdown Timer
+  progressBar: Progress Bar
+  breathingBall: Breathing Ball
+  blank: Blank
 
 # Labels in the pomodoro screen (main screen)
 pomodoro:

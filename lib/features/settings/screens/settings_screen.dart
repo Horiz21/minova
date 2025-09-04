@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:minova/core/models/pomodoro_settings_state.dart';
 import 'package:minova/core/providers/language_provider.dart';
 import 'package:minova/core/providers/pomodoro_settings_provider.dart';
 import 'package:minova/core/providers/theme_provider.dart';
+import 'package:minova/features/pomodoro/widgets/pomodoro_display.dart';
 import 'package:minova/gen/strings.g.dart';
 import 'package:minova/gen/language_constants.g.dart';
 import 'package:minova/gen/theme_constants.g.dart';
@@ -55,13 +58,15 @@ class SettingsScreen extends ConsumerWidget {
               "${currentPomodoroSettings.longBreakDuration}",
             ),
             trailing: const Icon(Icons.timelapse),
-            onTap: null,
+            onTap: () => _showPomodoroTimingDialog(context, ref),
           ),
           ListTile(
-            title: Text(t.settings.groups.pomodoro.style.title),
-            subtitle: Text('TODO'), // TODO: show current style
+            title: Text(t.settings.groups.pomodoro.style),
+            subtitle: Text(
+              t.pomodoroStyles[currentPomodoroSettings.displayMode.name]!,
+            ),
             trailing: const Icon(Icons.style),
-            onTap: null,
+            onTap: () => _showPomodoroDisplayModeDialog(context, ref),
           ),
 
           _SectionHeader(title: t.settings.groups.about.title),
@@ -251,6 +256,165 @@ void _showLanguageDialog(BuildContext context, WidgetRef ref) {
             child: Text(t.common.cancel),
           ),
         ],
+      );
+    },
+  );
+}
+
+void _showPomodoroTimingDialog(BuildContext context, WidgetRef ref) {
+  final t = Translations.of(context);
+  final settings = ref.read(appPomodoroSettingsProvider);
+
+  final focusCtrl = TextEditingController(
+    text: settings.focusDuration.toString(),
+  );
+  final shortBreakCtrl = TextEditingController(
+    text: settings.shortBreakDuration.toString(),
+  );
+  final longBreakCtrl = TextEditingController(
+    text: settings.longBreakDuration.toString(),
+  );
+  final cyclesCtrl = TextEditingController(
+    text: settings.cyclesBeforeLongBreak.toString(),
+  );
+
+  bool autoStart = settings.autoStartAfterPhaseChange;
+
+  showDialog(
+    context: context,
+    builder: (context) {
+      return StatefulBuilder(
+        builder: (context, setDialogState) {
+          return AlertDialog(
+            title: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(t.settings.groups.pomodoro.durations.title),
+                Tooltip(
+                  message: t.common.resetToDefault,
+                  child: IconButton(
+                    icon: const Icon(Icons.replay),
+                    onPressed: () {
+                      setDialogState(() {
+                        focusCtrl.text = '25';
+                        shortBreakCtrl.text = '5';
+                        longBreakCtrl.text = '15';
+                        cyclesCtrl.text = '4';
+                      });
+                    },
+                  ),
+                ),
+              ],
+            ),
+            content: SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  _buildTextField(t.pomodoro.phases.focus, focusCtrl),
+                  _buildTextField(t.pomodoro.phases.shortBreak, shortBreakCtrl),
+                  _buildTextField(t.pomodoro.phases.longBreak, longBreakCtrl),
+                  _buildTextField(
+                    t.settings.groups.pomodoro.cyclesBeforeLongBreak,
+                    cyclesCtrl,
+                  ),
+                  StatefulBuilder(
+                    builder: (context, setDialogState) {
+                      return SwitchListTile(
+                        title: Text(
+                          t.settings.groups.pomodoro.autoStartNextCycle,
+                        ),
+                        value: autoStart,
+                        onChanged: (value) =>
+                            setDialogState(() => autoStart = value),
+                      );
+                    },
+                  ),
+                ],
+              ),
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: Text(t.common.cancel),
+              ),
+              TextButton(
+                onPressed: () {
+                  final newSettings = PomodoroSettingsState(
+                    focusDuration:
+                        int.tryParse(focusCtrl.text) ?? settings.focusDuration,
+                    shortBreakDuration:
+                        int.tryParse(shortBreakCtrl.text) ??
+                        settings.shortBreakDuration,
+                    longBreakDuration:
+                        int.tryParse(longBreakCtrl.text) ??
+                        settings.longBreakDuration,
+                    cyclesBeforeLongBreak:
+                        int.tryParse(cyclesCtrl.text) ??
+                        settings.cyclesBeforeLongBreak,
+                    autoStartAfterPhaseChange: autoStart,
+                    displayMode: settings.displayMode,
+                  );
+                  ref
+                      .read(appPomodoroSettingsProvider.notifier)
+                      .updateSettings(newSettings);
+                  Navigator.pop(context);
+                },
+                child: Text(t.common.save),
+              ),
+            ],
+          );
+        },
+      );
+    },
+  );
+}
+
+Widget _buildTextField(String label, TextEditingController controller) {
+  return Padding(
+    padding: const EdgeInsets.symmetric(vertical: 8.0),
+    child: TextField(
+      controller: controller,
+      decoration: InputDecoration(
+        labelText: label,
+        suffixText: t.common.minutes,
+        border: const OutlineInputBorder(),
+      ),
+
+      keyboardType: TextInputType.number,
+      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+    ),
+  );
+}
+
+void _showPomodoroDisplayModeDialog(BuildContext context, WidgetRef ref) {
+  final t = Translations.of(context);
+  final currentMode = ref.read(appPomodoroSettingsProvider).displayMode;
+
+  showDialog(
+    context: context,
+    builder: (context) {
+      return AlertDialog(
+        title: Text(t.settings.groups.pomodoro.style),
+        content: SizedBox(
+          width: double.maxFinite,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: PomodoroDisplayMode.values.map((mode) {
+              final modeName = t.pomodoroStyles[mode.name]!;
+              final isSelected = currentMode == mode;
+              return ListTile(
+                title: Text(modeName),
+                trailing: isSelected ? const Icon(Icons.check) : null,
+                onTap: () {
+                  ref
+                      .read(appPomodoroSettingsProvider.notifier)
+                      .updateDisplayMode(mode);
+                  Navigator.pop(context);
+                },
+              );
+            }).toList(),
+          ),
+        ),
       );
     },
   );

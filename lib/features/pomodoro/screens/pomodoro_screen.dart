@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:minova/core/providers/pomodoro_settings_provider.dart';
 import 'package:minova/features/pomodoro/models/pomodoro_models.dart';
 import 'package:minova/features/pomodoro/providers/pomodoro_provider.dart';
 import 'package:minova/features/pomodoro/widgets/pomodoro_display.dart';
@@ -12,6 +13,7 @@ class PomodoroScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final pomodoroState = ref.watch(pomodoroProvider);
+    final pomodoroSettingsState = ref.watch(appPomodoroSettingsProvider);
     final t = Translations.of(context);
 
     final phaseText = {
@@ -39,7 +41,7 @@ class PomodoroScreen extends ConsumerWidget {
           const SizedBox(height: 16),
           Expanded(
             child: PomodoroDisplay(
-              displayMode: PomodoroDisplayMode.countdownTimer,
+              displayMode: pomodoroSettingsState.displayMode,
               timeLeft: pomodoroState.timeLeftThisPhase,
               totalDuration: pomodoroState.totalDurationThisPhase,
               isRunning: pomodoroState.status == PomodoroStatus.running,

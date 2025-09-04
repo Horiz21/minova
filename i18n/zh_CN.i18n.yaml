@@ -17,6 +17,8 @@ common:
   close: 关闭
   success: 成功
   failed: 失败
+  resetToDefault: 恢复默认值
+  minutes: 分钟
 
 # Labels and option titles in the settings screen
 settings:
@@ -34,12 +36,9 @@ settings:
         focus: 专注时长
         shortBreak: 短休息时长
         longBreak: 长休息时长
-      style:
-        title: 样式
-        currentTime: 当前时间
-        countdownTimer: 倒计时
-        progressBar: 进度环
-        breathingBall: 呼吸球
+      cyclesBeforeLongBreak: 长休息前的专注轮数
+      autoStartNextCycle: 自动开始下一阶段
+      style: 样式
     about:
       title: 关于
       page: 项目主页
@@ -58,6 +57,14 @@ themeColors:
   verdant: 苍苔
   earthen: 沉香
   twilight: 暮色
+
+# Pomodoro styles in the settings screen
+pomodoroStyles:
+  currentTime: 当前时间
+  countdownTimer: 倒计时
+  progressBar: 进度环
+  breathingBall: 呼吸球
+  blank: 空白
 
 # Labels in the pomodoro screen (main screen)
 pomodoro:

@@ -1,5 +1,6 @@
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:minova/core/models/pomodoro_settings_state.dart';
+import 'package:minova/features/pomodoro/widgets/pomodoro_display.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'pomodoro_settings_provider.g.dart';
@@ -31,6 +32,11 @@ class AppPomodoroSettings extends _$AppPomodoroSettings {
         'pomodoroAutoStartAfterPhaseChange',
         defaultValue: true,
       ),
+      displayMode:
+          PomodoroDisplayMode.values[_settingsBox.get(
+            'pomodoroDisplayMode',
+            defaultValue: 'countdownTimer',
+          )],
     );
   }
 
@@ -53,5 +59,10 @@ class AppPomodoroSettings extends _$AppPomodoroSettings {
       newSettings.autoStartAfterPhaseChange,
     );
     state = newSettings;
+  }
+
+  void updateDisplayMode(PomodoroDisplayMode newDisplayMode) {
+    _settingsBox.put('pomodoroDisplayMode', newDisplayMode.index);
+    state = state.copyWith(displayMode: newDisplayMode);
   }
 }

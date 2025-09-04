@@ -49,6 +49,13 @@ class TranslationsZhCn extends Translations {
 		'earthen': '沉香',
 		'twilight': '暮色',
 	};
+	@override Map<String, String> get pomodoroStyles => {
+		'currentTime': '当前时间',
+		'countdownTimer': '倒计时',
+		'progressBar': '进度环',
+		'breathingBall': '呼吸球',
+		'blank': '空白',
+	};
 	@override late final _TranslationsPomodoroZhCn pomodoro = _TranslationsPomodoroZhCn._(_root);
 	@override late final _TranslationsMusicPlayerZhCn musicPlayer = _TranslationsMusicPlayerZhCn._(_root);
 	@override late final _TranslationsSoundMixerZhCn soundMixer = _TranslationsSoundMixerZhCn._(_root);
@@ -91,6 +98,8 @@ class _TranslationsCommonZhCn extends TranslationsCommonEnUs {
 	@override String get close => '关闭';
 	@override String get success => '成功';
 	@override String get failed => '失败';
+	@override String get resetToDefault => '恢复默认值';
+	@override String get minutes => '分钟';
 }
 
 // Path: settings
@@ -289,7 +298,9 @@ class _TranslationsSettingsGroupsPomodoroZhCn extends TranslationsSettingsGroups
 	// Translations
 	@override String get title => '番茄钟';
 	@override late final _TranslationsSettingsGroupsPomodoroDurationsZhCn durations = _TranslationsSettingsGroupsPomodoroDurationsZhCn._(_root);
-	@override late final _TranslationsSettingsGroupsPomodoroStyleZhCn style = _TranslationsSettingsGroupsPomodoroStyleZhCn._(_root);
+	@override String get cyclesBeforeLongBreak => '长休息前的专注轮数';
+	@override String get autoStartNextCycle => '自动开始下一阶段';
+	@override String get style => '样式';
 }
 
 // Path: settings.groups.about
@@ -316,18 +327,4 @@ class _TranslationsSettingsGroupsPomodoroDurationsZhCn extends TranslationsSetti
 	@override String get focus => '专注时长';
 	@override String get shortBreak => '短休息时长';
 	@override String get longBreak => '长休息时长';
-}
-
-// Path: settings.groups.pomodoro.style
-class _TranslationsSettingsGroupsPomodoroStyleZhCn extends TranslationsSettingsGroupsPomodoroStyleEnUs {
-	_TranslationsSettingsGroupsPomodoroStyleZhCn._(TranslationsZhCn root) : this._root = root, super.internal(root);
-
-	final TranslationsZhCn _root; // ignore: unused_field
-
-	// Translations
-	@override String get title => '样式';
-	@override String get currentTime => '当前时间';
-	@override String get countdownTimer => '倒计时';
-	@override String get progressBar => '进度环';
-	@override String get breathingBall => '呼吸球';
 }
