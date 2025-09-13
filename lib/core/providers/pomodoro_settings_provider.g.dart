@@ -7,7 +7,7 @@ part of 'pomodoro_settings_provider.dart';
 // **************************************************************************
 
 String _$appPomodoroSettingsHash() =>
-    r'9568f2e39943cab0a2a7b186b3387304d83879d3';
+    r'515eac6b0f2ec4b399e472b9f98394681bd4e0b3';
 
 /// See also [AppPomodoroSettings].
 @ProviderFor(AppPomodoroSettings)

@@ -3,7 +3,7 @@ meta:
   languageName: English
   regionName: United States
   created: '2025-07-15'
-  updated: '2025-08-31'
+  updated: '2025-09-05'
 
 # Application title and slogan
 app:
@@ -19,6 +19,7 @@ common:
   failed: Failed
   resetToDefault: Reset to Default
   minutes: Minute(s)
+  cycles: Cycle(s)
 
 # Labels and option titles in the settings screen
 settings:
@@ -26,45 +27,64 @@ settings:
   groups:
     general:
       title: General
-      language: Language
-      themeColor: Theme Color
-      themeMode: Theme Mode
+      items:
+        language:
+          label: Language
+        themeColor:
+          label: Theme Color
+          options:
+            graphite: Graphite
+            everflame: Everflame
+            abyssal: Abyssal
+            verdant: Verdant
+            earthen: Earthen
+            twilight: Twilight
+        themeMode:
+          label: Theme Mode
+          options:
+            light: Light Mode
+            dark: Dark Mode
+            system: Sync with System
     pomodoro:
       title: Pomodoro
-      durations:
-        title: Durations
-        focus: Focus Duration
-        shortBreak: Short Break Duration
-        longBreak: Long Break Duration
-      cyclesBeforeLongBreak: Cycles Before Long Break
-      autoStartNextCycle: Auto Start Next Cycle
-      style: Style
+      items:
+        durations:
+          label: Durations
+          fields:
+            focus: Focus Duration
+            shortBreak: Short Break Duration
+            longBreak: Long Break Duration
+        longBreakInterval:
+          label: Long Break Interval
+          description:
+            one: 'Long Break After $n cycle'
+            other: 'Long Break After $n cycles'
+        autoStartPhases:
+          label: Automatically Start Next Phase
+          options:
+            always:
+              label: 'Always'
+              description: 'Automatically start the next phase, whether the current one finishes naturally or is manually actioned (e.g., "Skip Phase").'
+            onNaturalCompletion:
+              label: 'On Natural Completion'
+              description: 'Automatically start the next phase ONLY when the timer completes naturally. Manual actions like "Skip Phase" or "Reset Phase" will require a manual start.'
+            never:
+              label: 'Never'
+              description: 'Always require a manual start for the next phase. Not recommended!'
+        style:
+          label: Style
+          options:
+            currentTime: Current Time
+            countdownTimer: Countdown Timer
+            progressBar: Progress Bar
+            breathingBall: Breathing Ball
+            blank: Blank
     about:
       title: About
-      page: Project Page
-      gitHub: GitHub Repository
-      email: Contact via Email
-
-# Theme modes and theme colors in the settings screen
-themeModes:
-  light: Light Mode
-  dark: Dark Mode
-  system: Sync with System
-themeColors:
-  graphite: Graphite
-  everflame: Everflame
-  abyssal: Abyssal
-  verdant: Verdant
-  earthen: Earthen
-  twilight: Twilight
-
-# Pomodoro styles in the settings screen
-pomodoroStyles:
-  currentTime: Current Time
-  countdownTimer: Countdown Timer
-  progressBar: Progress Bar
-  breathingBall: Breathing Ball
-  blank: Blank
+      links:
+        page: Project Page
+        gitHub: GitHub Repository
+        email: Contact via Email
 
 # Labels in the pomodoro screen (main screen)
 pomodoro:

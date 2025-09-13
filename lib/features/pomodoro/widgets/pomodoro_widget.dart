@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-enum PomodoroDisplayMode {
+enum PomodoroStyle {
   countdownTimer,
   progressBar,
   currentTime,
@@ -10,13 +10,13 @@ enum PomodoroDisplayMode {
   blank,
 }
 
-class PomodoroDisplay extends StatefulWidget {
-  final PomodoroDisplayMode displayMode;
+class PomodoroWidget extends StatefulWidget {
+  final PomodoroStyle displayMode;
   final Duration timeLeft;
   final Duration totalDuration;
   final bool isRunning;
 
-  const PomodoroDisplay({
+  const PomodoroWidget({
     super.key,
     required this.displayMode,
     required this.timeLeft,
@@ -25,10 +25,10 @@ class PomodoroDisplay extends StatefulWidget {
   });
 
   @override
-  State<PomodoroDisplay> createState() => _PomodoroDisplayState();
+  State<PomodoroWidget> createState() => _PomodoroWidgetState();
 }
 
-class _PomodoroDisplayState extends State<PomodoroDisplay>
+class _PomodoroWidgetState extends State<PomodoroWidget>
     with SingleTickerProviderStateMixin {
   late final AnimationController _breathingController;
   Timer? _currentTimeTimer;
@@ -44,7 +44,7 @@ class _PomodoroDisplayState extends State<PomodoroDisplay>
 
     _now = DateTime.now();
 
-    if (widget.displayMode == PomodoroDisplayMode.currentTime) {
+    if (widget.displayMode == PomodoroStyle.currentTime) {
       _startCurrentTimeTimer();
     }
 
@@ -54,7 +54,7 @@ class _PomodoroDisplayState extends State<PomodoroDisplay>
   }
 
   @override
-  void didUpdateWidget(covariant PomodoroDisplay oldWidget) {
+  void didUpdateWidget(covariant PomodoroWidget oldWidget) {
     super.didUpdateWidget(oldWidget);
 
     if (widget.isRunning != oldWidget.isRunning) {
@@ -66,7 +66,7 @@ class _PomodoroDisplayState extends State<PomodoroDisplay>
     }
 
     if (widget.displayMode != oldWidget.displayMode) {
-      if (widget.displayMode == PomodoroDisplayMode.currentTime) {
+      if (widget.displayMode == PomodoroStyle.currentTime) {
         _startCurrentTimeTimer();
       } else {
         _stopCurrentTimeTimer();
@@ -108,15 +108,15 @@ class _PomodoroDisplayState extends State<PomodoroDisplay>
 
   Widget _buildDisplayMode() {
     switch (widget.displayMode) {
-      case PomodoroDisplayMode.countdownTimer:
+      case PomodoroStyle.countdownTimer:
         return _buildCountdownTimer(key: const ValueKey('countdownTimer'));
-      case PomodoroDisplayMode.progressBar:
+      case PomodoroStyle.progressBar:
         return _buildProgressBar(key: const ValueKey('progressBar'));
-      case PomodoroDisplayMode.currentTime:
+      case PomodoroStyle.currentTime:
         return _buildCurrentTime(key: const ValueKey('currentTime'));
-      case PomodoroDisplayMode.breathingBall:
+      case PomodoroStyle.breathingBall:
         return _buildBreathingBall(key: const ValueKey('breathingBall'));
-      case PomodoroDisplayMode.blank:
+      case PomodoroStyle.blank:
         return const SizedBox.shrink(key: ValueKey('blank'));
     }
   }

@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:minova/core/models/pomodoro_settings_state.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:minova/core/providers/pomodoro_settings_provider.dart';
 import 'package:minova/features/pomodoro/models/pomodoro_models.dart';
@@ -27,8 +28,8 @@ class Pomodoro extends _$Pomodoro {
 
   /// Starts or resumes the pomodoro timer.
   ///
-  /// This is triggered either by a direct user press on the start/resume button,
-  /// or automatically by the `skipPhase` method when `autoStartAfterPhaseChange` is enabled.
+  /// This method is called either by a direct user action or automatically
+  /// by the `skipPhase` method based on the auto-start settings.
   void start() {
     if (state.status == PomodoroStatus.running) return;
 
@@ -36,6 +37,7 @@ class Pomodoro extends _$Pomodoro {
     _startTimer();
   }
 
+  /// Pauses the currently running timer.
   void pause() {
     if (state.status != PomodoroStatus.running) return;
 
@@ -43,6 +45,7 @@ class Pomodoro extends _$Pomodoro {
     state = state.copyWith(status: PomodoroStatus.paused);
   }
 
+  /// Stops the timer and resets the entire pomodoro cycle to the beginning.
   void stop() {
     _timer?.cancel();
     final settings = ref.read(appPomodoroSettingsProvider);
@@ -56,14 +59,17 @@ class Pomodoro extends _$Pomodoro {
     );
   }
 
-  /// Transitions the timer to the next phase of the pomodoro cycle (e.g., from focus to a break).
+  /// Transitions the timer to the next phase of the pomodoro cycle.
   ///
-  /// This method can be triggered manually by a user action or automatically when
-  /// the current phase's timer completes. It determines the next phase
-  /// (focus, short break, or long break) based on the current cycle count
-  /// and updates the state accordingly. If `autoStartAfterPhaseChange` is enabled,
-  /// it will also immediately start the timer for the new phase.
-  void skipPhase() {
+  /// This method can be triggered manually by a user action (e.g., `skipPhase` button)
+  /// or automatically when the current phase's timer completes. The `isNaturalCompletion`
+  /// parameter is used to differentiate between these two triggers.
+  ///
+  /// It determines the next phase based on the current cycle count and updates the state.
+  /// Based on the `autoStartPhaseMode` setting, it may also automatically start the
+  /// timer for the new phase. For example, if the mode is `onNaturalCompletion`,
+  /// the timer will only start if `isNaturalCompletion` is true.
+  void skipPhase({bool isNaturalCompletion = false}) {
     _timer?.cancel();
     final settings = ref.read(appPomodoroSettingsProvider);
 
@@ -74,7 +80,7 @@ class Pomodoro extends _$Pomodoro {
     Duration nextDuration;
 
     if (state.phase == PomodoroPhase.focus) {
-      if (nextCycleCount % settings.cyclesBeforeLongBreak == 0) {
+      if (nextCycleCount % settings.longBreakInterval == 0) {
         nextPhase = PomodoroPhase.longBreak;
         nextDuration = Duration(minutes: settings.longBreakDuration);
       } else {
@@ -97,8 +103,15 @@ class Pomodoro extends _$Pomodoro {
       countThisCycle: nextCycleCount,
     );
 
-    if (settings.autoStartAfterPhaseChange) {
-      start();
+    switch (settings.autoStartPhaseMode) {
+      case AutoStartPhaseMode.always:
+        start();
+        break;
+      case AutoStartPhaseMode.onNaturalCompletion:
+        if (isNaturalCompletion) start();
+        break;
+      case AutoStartPhaseMode.never:
+        break;
     }
   }
 
@@ -107,7 +120,7 @@ class Pomodoro extends _$Pomodoro {
         state.timeLeftThisPhase - const Duration(milliseconds: 100);
 
     if (timeLeft.isNegative) {
-      skipPhase();
+      skipPhase(isNaturalCompletion: true);
     } else {
       state = state.copyWith(timeLeftThisPhase: timeLeft);
     }

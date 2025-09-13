@@ -13,6 +13,7 @@ targets:
           - assets.musicTracks
           - assets.albums
           - assets.ambientSounds
-          - themeModes
-          - themeColors
-          - pomodoroStyles
+          - settings.groups.general.items.themeColor.options
+          - settings.groups.general.items.themeMode.options
+          - settings.groups.pomodoro.items.autoStartPhases.options
+          - settings.groups.pomodoro.items.style.options

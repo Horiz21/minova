@@ -5,7 +5,7 @@ import 'package:minova/core/models/pomodoro_settings_state.dart';
 import 'package:minova/core/providers/language_provider.dart';
 import 'package:minova/core/providers/pomodoro_settings_provider.dart';
 import 'package:minova/core/providers/theme_provider.dart';
-import 'package:minova/features/pomodoro/widgets/pomodoro_display.dart';
+import 'package:minova/features/pomodoro/widgets/pomodoro_widget.dart';
 import 'package:minova/gen/strings.g.dart';
 import 'package:minova/gen/language_constants.g.dart';
 import 'package:minova/gen/theme_constants.g.dart';
@@ -31,19 +31,30 @@ class SettingsScreen extends ConsumerWidget {
         children: [
           _SectionHeader(title: t.settings.groups.general.title),
           ListTile(
-            title: Text(t.settings.groups.general.themeMode),
-            subtitle: Text(t.themeModes[currentThemeMode.name]!),
+            title: Text(t.settings.groups.general.items.themeMode.label),
+            subtitle: Text(
+              t.settings.groups.general.items.themeMode.options[currentThemeMode
+                  .name]!,
+            ),
             trailing: const Icon(Icons.brightness_medium_outlined),
             onTap: () => _showThemeModeDialog(context, ref),
           ),
           ListTile(
-            title: Text(t.settings.groups.general.themeColor),
-            subtitle: Text(t.themeColors[currentThemeColor.id]!),
+            title: Text(t.settings.groups.general.items.themeColor.label),
+            subtitle: Text(
+              t
+                  .settings
+                  .groups
+                  .general
+                  .items
+                  .themeColor
+                  .options[currentThemeColor.id]!,
+            ),
             trailing: const Icon(Icons.color_lens_outlined),
-            onTap: () => _showColorPickerDialog(context, ref),
+            onTap: () => _showThemeColorDialog(context, ref),
           ),
           ListTile(
-            title: Text(t.settings.groups.general.language),
+            title: Text(t.settings.groups.general.items.language.label),
             subtitle: Text(currentLanguageName),
             trailing: const Icon(Icons.language),
             onTap: () => _showLanguageDialog(context, ref),
@@ -51,22 +62,44 @@ class SettingsScreen extends ConsumerWidget {
 
           _SectionHeader(title: t.settings.groups.pomodoro.title),
           ListTile(
-            title: Text(t.settings.groups.pomodoro.durations.title),
+            title: Text(t.settings.groups.pomodoro.items.durations.label),
             subtitle: Text(
-              "${currentPomodoroSettings.focusDuration}/"
-              "${currentPomodoroSettings.shortBreakDuration}/"
-              "${currentPomodoroSettings.longBreakDuration}",
+              "${currentPomodoroSettings.focusDuration} / "
+              "${currentPomodoroSettings.shortBreakDuration} / "
+              "${currentPomodoroSettings.longBreakDuration} / "
+              "${t.settings.groups.pomodoro.items.longBreakInterval.description(n: currentPomodoroSettings.longBreakInterval)}",
             ),
             trailing: const Icon(Icons.timelapse),
             onTap: () => _showPomodoroTimingDialog(context, ref),
           ),
           ListTile(
-            title: Text(t.settings.groups.pomodoro.style),
+            title: Text(t.settings.groups.pomodoro.items.autoStartPhases.label),
             subtitle: Text(
-              t.pomodoroStyles[currentPomodoroSettings.displayMode.name]!,
+              t
+                  .settings
+                  .groups
+                  .pomodoro
+                  .items
+                  .autoStartPhases
+                  .options[currentPomodoroSettings.autoStartPhaseMode.name]!
+                  .label,
+            ),
+            trailing: const Icon(Icons.play_circle_outline),
+            onTap: () => _showAutoStartPhaseDialog(context, ref),
+          ),
+          ListTile(
+            title: Text(t.settings.groups.pomodoro.items.style.label),
+            subtitle: Text(
+              t
+                  .settings
+                  .groups
+                  .pomodoro
+                  .items
+                  .style
+                  .options[currentPomodoroSettings.pomodoroStyle.name]!,
             ),
             trailing: const Icon(Icons.style),
-            onTap: () => _showPomodoroDisplayModeDialog(context, ref),
+            onTap: () => _showPomodoroStyleDialog(context, ref),
           ),
 
           _SectionHeader(title: t.settings.groups.about.title),
@@ -76,7 +109,7 @@ class SettingsScreen extends ConsumerWidget {
           //   onTap: null,
           // ),
           ListTile(
-            title: Text(t.settings.groups.about.gitHub),
+            title: Text(t.settings.groups.about.links.gitHub),
             trailing: const Icon(Icons.open_in_browser),
             onTap: () async {
               if (await canLaunchUrl(githubUri)) {
@@ -87,7 +120,7 @@ class SettingsScreen extends ConsumerWidget {
             },
           ),
           ListTile(
-            title: Text(t.settings.groups.about.email),
+            title: Text(t.settings.groups.about.links.email),
             trailing: const Icon(Icons.mail),
             onTap: () async {
               if (await canLaunchUrl(emailUri)) {
@@ -110,17 +143,17 @@ void _showThemeModeDialog(BuildContext context, WidgetRef ref) {
   final themeModes = [
     {
       'mode': ThemeMode.light,
-      'name': t.themeModes['light'],
+      'name': t.settings.groups.general.items.themeMode.options['light'],
       'icon': Icons.light_mode_outlined,
     },
     {
       'mode': ThemeMode.dark,
-      'name': t.themeModes['dark'],
+      'name': t.settings.groups.general.items.themeMode.options['dark'],
       'icon': Icons.dark_mode_outlined,
     },
     {
       'mode': ThemeMode.system,
-      'name': t.themeModes['system'],
+      'name': t.settings.groups.general.items.themeMode.options['system'],
       'icon': Icons.brightness_auto_outlined,
     },
   ];
@@ -129,7 +162,7 @@ void _showThemeModeDialog(BuildContext context, WidgetRef ref) {
     context: context,
     builder: (BuildContext dialogContext) {
       return AlertDialog(
-        title: Text(t.settings.groups.general.themeMode),
+        title: Text(t.settings.groups.general.items.themeMode.label),
         content: SizedBox(
           width: double.maxFinite,
           child: Column(
@@ -165,29 +198,36 @@ void _showThemeModeDialog(BuildContext context, WidgetRef ref) {
   );
 }
 
-void _showColorPickerDialog(BuildContext context, WidgetRef ref) {
-  final currentColor = ref.read(appThemeColorProvider);
+void _showThemeColorDialog(BuildContext context, WidgetRef ref) {
+  final t = Translations.of(context);
+  final currentThemeColor = ref.read(appThemeColorProvider);
 
   showDialog(
     context: context,
-    builder: (context) {
+    builder: (BuildContext dialogContext) {
       return AlertDialog(
-        title: Text(t.settings.groups.general.themeColor),
+        title: Text(t.settings.groups.general.items.themeColor.label),
         contentPadding: const EdgeInsets.fromLTRB(16, 20, 16, 0),
         content: SizedBox(
           width: double.maxFinite,
           child: Wrap(
             spacing: 12.0,
             runSpacing: 12.0,
-            children: kAppThemeColors.values.map((themeInfo) {
-              final isSelected = currentColor.id == themeInfo.id;
-              final colorDisplayName = t.themeColors[themeInfo.id]!;
+            children: kAppThemeColors.values.map((themeColor) {
+              final isSelected = currentThemeColor.id == themeColor.id;
+              final colorDisplayName = t
+                  .settings
+                  .groups
+                  .general
+                  .items
+                  .themeColor
+                  .options[themeColor.id]!;
               return ListTile(
                 leading: Container(
                   width: 36,
                   height: 36,
                   decoration: BoxDecoration(
-                    color: themeInfo.color,
+                    color: themeColor.color,
                     shape: BoxShape.circle,
                   ),
                 ),
@@ -196,8 +236,8 @@ void _showColorPickerDialog(BuildContext context, WidgetRef ref) {
                 onTap: () {
                   ref
                       .read(appThemeColorProvider.notifier)
-                      .setThemeColor(themeInfo.id, themeInfo.color);
-                  Navigator.of(context).pop();
+                      .setThemeColor(themeColor.id, themeColor.color);
+                  Navigator.of(dialogContext).pop();
                 },
               );
             }).toList(),
@@ -205,7 +245,7 @@ void _showColorPickerDialog(BuildContext context, WidgetRef ref) {
         ),
         actions: [
           TextButton(
-            onPressed: () => Navigator.of(context).pop(),
+            onPressed: () => Navigator.of(dialogContext).pop(),
             child: Text(t.common.cancel),
           ),
         ],
@@ -222,7 +262,7 @@ void _showLanguageDialog(BuildContext context, WidgetRef ref) {
     context: context,
     builder: (BuildContext dialogContext) {
       return AlertDialog(
-        title: Text(t.settings.groups.general.language),
+        title: Text(t.settings.groups.general.items.language.label),
         content: SizedBox(
           width: double.maxFinite,
           child: Column(
@@ -275,21 +315,21 @@ void _showPomodoroTimingDialog(BuildContext context, WidgetRef ref) {
     text: settings.longBreakDuration.toString(),
   );
   final cyclesCtrl = TextEditingController(
-    text: settings.cyclesBeforeLongBreak.toString(),
+    text: settings.longBreakInterval.toString(),
   );
 
-  bool autoStart = settings.autoStartAfterPhaseChange;
+  AutoStartPhaseMode autoStart = settings.autoStartPhaseMode;
 
   showDialog(
     context: context,
-    builder: (context) {
+    builder: (BuildContext dialogContext) {
       return StatefulBuilder(
         builder: (context, setDialogState) {
           return AlertDialog(
             title: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(t.settings.groups.pomodoro.durations.title),
+                Text(t.settings.groups.pomodoro.items.durations.label),
                 Tooltip(
                   message: t.common.resetToDefault,
                   child: IconButton(
@@ -300,6 +340,7 @@ void _showPomodoroTimingDialog(BuildContext context, WidgetRef ref) {
                         shortBreakCtrl.text = '5';
                         longBreakCtrl.text = '15';
                         cyclesCtrl.text = '4';
+                        autoStart = AutoStartPhaseMode.always;
                       });
                     },
                   ),
@@ -310,24 +351,39 @@ void _showPomodoroTimingDialog(BuildContext context, WidgetRef ref) {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  _buildTextField(t.pomodoro.phases.focus, focusCtrl),
-                  _buildTextField(t.pomodoro.phases.shortBreak, shortBreakCtrl),
-                  _buildTextField(t.pomodoro.phases.longBreak, longBreakCtrl),
-                  _buildTextField(
-                    t.settings.groups.pomodoro.cyclesBeforeLongBreak,
-                    cyclesCtrl,
-                  ),
-                  StatefulBuilder(
-                    builder: (context, setDialogState) {
-                      return SwitchListTile(
-                        title: Text(
-                          t.settings.groups.pomodoro.autoStartNextCycle,
-                        ),
-                        value: autoStart,
-                        onChanged: (value) =>
-                            setDialogState(() => autoStart = value),
-                      );
+                  Table(
+                    columnWidths: const {
+                      0: FlexColumnWidth(),
+                      1: IntrinsicColumnWidth(),
                     },
+                    children: [
+                      _buildDurationInputRow(
+                        t.pomodoro.phases.focus,
+                        focusCtrl,
+                        t.common.minutes,
+                      ),
+                      _buildDurationInputRow(
+                        t.pomodoro.phases.shortBreak,
+                        shortBreakCtrl,
+                        t.common.minutes,
+                      ),
+                      _buildDurationInputRow(
+                        t.pomodoro.phases.longBreak,
+                        longBreakCtrl,
+                        t.common.minutes,
+                      ),
+                      _buildDurationInputRow(
+                        t
+                            .settings
+                            .groups
+                            .pomodoro
+                            .items
+                            .longBreakInterval
+                            .label,
+                        cyclesCtrl,
+                        t.common.cycles,
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -348,11 +404,11 @@ void _showPomodoroTimingDialog(BuildContext context, WidgetRef ref) {
                     longBreakDuration:
                         int.tryParse(longBreakCtrl.text) ??
                         settings.longBreakDuration,
-                    cyclesBeforeLongBreak:
+                    longBreakInterval:
                         int.tryParse(cyclesCtrl.text) ??
-                        settings.cyclesBeforeLongBreak,
-                    autoStartAfterPhaseChange: autoStart,
-                    displayMode: settings.displayMode,
+                        settings.longBreakInterval,
+                    autoStartPhaseMode: autoStart,
+                    pomodoroStyle: settings.pomodoroStyle,
                   );
                   ref
                       .read(appPomodoroSettingsProvider.notifier)
@@ -369,38 +425,107 @@ void _showPomodoroTimingDialog(BuildContext context, WidgetRef ref) {
   );
 }
 
-Widget _buildTextField(String label, TextEditingController controller) {
-  return Padding(
-    padding: const EdgeInsets.symmetric(vertical: 8.0),
-    child: TextField(
-      controller: controller,
-      decoration: InputDecoration(
-        labelText: label,
-        suffixText: t.common.minutes,
-        border: const OutlineInputBorder(),
+TableRow _buildDurationInputRow(
+  String label,
+  TextEditingController controller,
+  String unitText,
+) {
+  return TableRow(
+    children: [
+      TableCell(
+        verticalAlignment: TableCellVerticalAlignment.middle,
+        child: Text(label),
       ),
-
-      keyboardType: TextInputType.number,
-      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-    ),
+      TableCell(
+        verticalAlignment: TableCellVerticalAlignment.middle,
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            SizedBox(
+              width: 48,
+              child: TextField(
+                controller: controller,
+                textAlign: TextAlign.center,
+                keyboardType: TextInputType.number,
+                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+              ),
+            ),
+            const SizedBox(width: 8),
+            Text(unitText),
+          ],
+        ),
+      ),
+    ],
   );
 }
 
-void _showPomodoroDisplayModeDialog(BuildContext context, WidgetRef ref) {
+void _showAutoStartPhaseDialog(BuildContext context, WidgetRef ref) {
   final t = Translations.of(context);
-  final currentMode = ref.read(appPomodoroSettingsProvider).displayMode;
+  final settings = ref.read(appPomodoroSettingsProvider);
+  final currentMode = settings.autoStartPhaseMode;
 
   showDialog(
     context: context,
     builder: (context) {
       return AlertDialog(
-        title: Text(t.settings.groups.pomodoro.style),
+        title: Text(t.settings.groups.pomodoro.items.autoStartPhases.label),
         content: SizedBox(
           width: double.maxFinite,
           child: Column(
             mainAxisSize: MainAxisSize.min,
-            children: PomodoroDisplayMode.values.map((mode) {
-              final modeName = t.pomodoroStyles[mode.name]!;
+            children: AutoStartPhaseMode.values.map((mode) {
+              final option = t
+                  .settings
+                  .groups
+                  .pomodoro
+                  .items
+                  .autoStartPhases
+                  .options[mode.name]!;
+              final modeLabel = option.label;
+              final modeDescription = option.description;
+              final isSelected = currentMode == mode;
+
+              return ListTile(
+                title: Text(modeLabel),
+                subtitle: Text(modeDescription),
+                trailing: isSelected ? const Icon(Icons.check) : null,
+                onTap: () {
+                  ref
+                      .read(appPomodoroSettingsProvider.notifier)
+                      .updateAutoStartMode(mode);
+                  Navigator.pop(context);
+                },
+              );
+            }).toList(),
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: Text(t.common.cancel),
+          ),
+        ],
+      );
+    },
+  );
+}
+
+void _showPomodoroStyleDialog(BuildContext context, WidgetRef ref) {
+  final t = Translations.of(context);
+  final currentMode = ref.read(appPomodoroSettingsProvider).pomodoroStyle;
+
+  showDialog(
+    context: context,
+    builder: (context) {
+      return AlertDialog(
+        title: Text(t.settings.groups.pomodoro.items.style.label),
+        content: SizedBox(
+          width: double.maxFinite,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: PomodoroStyle.values.map((mode) {
+              final modeName =
+                  t.settings.groups.pomodoro.items.style.options[mode.name]!;
               final isSelected = currentMode == mode;
               return ListTile(
                 title: Text(modeName),

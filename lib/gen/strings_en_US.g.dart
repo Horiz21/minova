@@ -38,26 +38,6 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	late final TranslationsAppEnUs app = TranslationsAppEnUs.internal(_root);
 	late final TranslationsCommonEnUs common = TranslationsCommonEnUs.internal(_root);
 	late final TranslationsSettingsEnUs settings = TranslationsSettingsEnUs.internal(_root);
-	Map<String, String> get themeModes => {
-		'light': 'Light Mode',
-		'dark': 'Dark Mode',
-		'system': 'Sync with System',
-	};
-	Map<String, String> get themeColors => {
-		'graphite': 'Graphite',
-		'everflame': 'Everflame',
-		'abyssal': 'Abyssal',
-		'verdant': 'Verdant',
-		'earthen': 'Earthen',
-		'twilight': 'Twilight',
-	};
-	Map<String, String> get pomodoroStyles => {
-		'currentTime': 'Current Time',
-		'countdownTimer': 'Countdown Timer',
-		'progressBar': 'Progress Bar',
-		'breathingBall': 'Breathing Ball',
-		'blank': 'Blank',
-	};
 	late final TranslationsPomodoroEnUs pomodoro = TranslationsPomodoroEnUs.internal(_root);
 	late final TranslationsMusicPlayerEnUs musicPlayer = TranslationsMusicPlayerEnUs.internal(_root);
 	late final TranslationsSoundMixerEnUs soundMixer = TranslationsSoundMixerEnUs.internal(_root);
@@ -81,8 +61,8 @@ class TranslationsMetaEnUs {
 	/// en-US: '2025-07-15'
 	String get created => '2025-07-15';
 
-	/// en-US: '2025-08-31'
-	String get updated => '2025-08-31';
+	/// en-US: '2025-09-05'
+	String get updated => '2025-09-05';
 }
 
 // Path: app
@@ -128,6 +108,9 @@ class TranslationsCommonEnUs {
 
 	/// en-US: 'Minute(s)'
 	String get minutes => 'Minute(s)';
+
+	/// en-US: 'Cycle(s)'
+	String get cycles => 'Cycle(s)';
 }
 
 // Path: settings
@@ -563,14 +546,7 @@ class TranslationsSettingsGroupsGeneralEnUs {
 	/// en-US: 'General'
 	String get title => 'General';
 
-	/// en-US: 'Language'
-	String get language => 'Language';
-
-	/// en-US: 'Theme Color'
-	String get themeColor => 'Theme Color';
-
-	/// en-US: 'Theme Mode'
-	String get themeMode => 'Theme Mode';
+	late final TranslationsSettingsGroupsGeneralItemsEnUs items = TranslationsSettingsGroupsGeneralItemsEnUs.internal(_root);
 }
 
 // Path: settings.groups.pomodoro
@@ -584,16 +560,7 @@ class TranslationsSettingsGroupsPomodoroEnUs {
 	/// en-US: 'Pomodoro'
 	String get title => 'Pomodoro';
 
-	late final TranslationsSettingsGroupsPomodoroDurationsEnUs durations = TranslationsSettingsGroupsPomodoroDurationsEnUs.internal(_root);
-
-	/// en-US: 'Cycles Before Long Break'
-	String get cyclesBeforeLongBreak => 'Cycles Before Long Break';
-
-	/// en-US: 'Auto Start Next Cycle'
-	String get autoStartNextCycle => 'Auto Start Next Cycle';
-
-	/// en-US: 'Style'
-	String get style => 'Style';
+	late final TranslationsSettingsGroupsPomodoroItemsEnUs items = TranslationsSettingsGroupsPomodoroItemsEnUs.internal(_root);
 }
 
 // Path: settings.groups.about
@@ -607,6 +574,42 @@ class TranslationsSettingsGroupsAboutEnUs {
 	/// en-US: 'About'
 	String get title => 'About';
 
+	late final TranslationsSettingsGroupsAboutLinksEnUs links = TranslationsSettingsGroupsAboutLinksEnUs.internal(_root);
+}
+
+// Path: settings.groups.general.items
+class TranslationsSettingsGroupsGeneralItemsEnUs {
+	TranslationsSettingsGroupsGeneralItemsEnUs.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	late final TranslationsSettingsGroupsGeneralItemsLanguageEnUs language = TranslationsSettingsGroupsGeneralItemsLanguageEnUs.internal(_root);
+	late final TranslationsSettingsGroupsGeneralItemsThemeColorEnUs themeColor = TranslationsSettingsGroupsGeneralItemsThemeColorEnUs.internal(_root);
+	late final TranslationsSettingsGroupsGeneralItemsThemeModeEnUs themeMode = TranslationsSettingsGroupsGeneralItemsThemeModeEnUs.internal(_root);
+}
+
+// Path: settings.groups.pomodoro.items
+class TranslationsSettingsGroupsPomodoroItemsEnUs {
+	TranslationsSettingsGroupsPomodoroItemsEnUs.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	late final TranslationsSettingsGroupsPomodoroItemsDurationsEnUs durations = TranslationsSettingsGroupsPomodoroItemsDurationsEnUs.internal(_root);
+	late final TranslationsSettingsGroupsPomodoroItemsLongBreakIntervalEnUs longBreakInterval = TranslationsSettingsGroupsPomodoroItemsLongBreakIntervalEnUs.internal(_root);
+	late final TranslationsSettingsGroupsPomodoroItemsAutoStartPhasesEnUs autoStartPhases = TranslationsSettingsGroupsPomodoroItemsAutoStartPhasesEnUs.internal(_root);
+	late final TranslationsSettingsGroupsPomodoroItemsStyleEnUs style = TranslationsSettingsGroupsPomodoroItemsStyleEnUs.internal(_root);
+}
+
+// Path: settings.groups.about.links
+class TranslationsSettingsGroupsAboutLinksEnUs {
+	TranslationsSettingsGroupsAboutLinksEnUs.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
 	/// en-US: 'Project Page'
 	String get page => 'Project Page';
 
@@ -617,16 +620,134 @@ class TranslationsSettingsGroupsAboutEnUs {
 	String get email => 'Contact via Email';
 }
 
-// Path: settings.groups.pomodoro.durations
-class TranslationsSettingsGroupsPomodoroDurationsEnUs {
-	TranslationsSettingsGroupsPomodoroDurationsEnUs.internal(this._root);
+// Path: settings.groups.general.items.language
+class TranslationsSettingsGroupsGeneralItemsLanguageEnUs {
+	TranslationsSettingsGroupsGeneralItemsLanguageEnUs.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en-US: 'Language'
+	String get label => 'Language';
+}
+
+// Path: settings.groups.general.items.themeColor
+class TranslationsSettingsGroupsGeneralItemsThemeColorEnUs {
+	TranslationsSettingsGroupsGeneralItemsThemeColorEnUs.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en-US: 'Theme Color'
+	String get label => 'Theme Color';
+
+	Map<String, String> get options => {
+		'graphite': 'Graphite',
+		'everflame': 'Everflame',
+		'abyssal': 'Abyssal',
+		'verdant': 'Verdant',
+		'earthen': 'Earthen',
+		'twilight': 'Twilight',
+	};
+}
+
+// Path: settings.groups.general.items.themeMode
+class TranslationsSettingsGroupsGeneralItemsThemeModeEnUs {
+	TranslationsSettingsGroupsGeneralItemsThemeModeEnUs.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en-US: 'Theme Mode'
+	String get label => 'Theme Mode';
+
+	Map<String, String> get options => {
+		'light': 'Light Mode',
+		'dark': 'Dark Mode',
+		'system': 'Sync with System',
+	};
+}
+
+// Path: settings.groups.pomodoro.items.durations
+class TranslationsSettingsGroupsPomodoroItemsDurationsEnUs {
+	TranslationsSettingsGroupsPomodoroItemsDurationsEnUs.internal(this._root);
 
 	final Translations _root; // ignore: unused_field
 
 	// Translations
 
 	/// en-US: 'Durations'
-	String get title => 'Durations';
+	String get label => 'Durations';
+
+	late final TranslationsSettingsGroupsPomodoroItemsDurationsFieldsEnUs fields = TranslationsSettingsGroupsPomodoroItemsDurationsFieldsEnUs.internal(_root);
+}
+
+// Path: settings.groups.pomodoro.items.longBreakInterval
+class TranslationsSettingsGroupsPomodoroItemsLongBreakIntervalEnUs {
+	TranslationsSettingsGroupsPomodoroItemsLongBreakIntervalEnUs.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en-US: 'Long Break Interval'
+	String get label => 'Long Break Interval';
+
+	/// en-US: '(one) {Long Break After $n cycle} (other) {Long Break After $n cycles}'
+	String description({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
+		one: 'Long Break After ${n} cycle',
+		other: 'Long Break After ${n} cycles',
+	);
+}
+
+// Path: settings.groups.pomodoro.items.autoStartPhases
+class TranslationsSettingsGroupsPomodoroItemsAutoStartPhasesEnUs {
+	TranslationsSettingsGroupsPomodoroItemsAutoStartPhasesEnUs.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en-US: 'Automatically Start Next Phase'
+	String get label => 'Automatically Start Next Phase';
+
+	Map<String, dynamic> get options => {
+		'always': TranslationsSettingsGroupsPomodoroItemsAutoStartPhasesOptionsAlwaysEnUs.internal(_root),
+		'onNaturalCompletion': TranslationsSettingsGroupsPomodoroItemsAutoStartPhasesOptionsOnNaturalCompletionEnUs.internal(_root),
+		'never': TranslationsSettingsGroupsPomodoroItemsAutoStartPhasesOptionsNeverEnUs.internal(_root),
+	};
+}
+
+// Path: settings.groups.pomodoro.items.style
+class TranslationsSettingsGroupsPomodoroItemsStyleEnUs {
+	TranslationsSettingsGroupsPomodoroItemsStyleEnUs.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en-US: 'Style'
+	String get label => 'Style';
+
+	Map<String, String> get options => {
+		'currentTime': 'Current Time',
+		'countdownTimer': 'Countdown Timer',
+		'progressBar': 'Progress Bar',
+		'breathingBall': 'Breathing Ball',
+		'blank': 'Blank',
+	};
+}
+
+// Path: settings.groups.pomodoro.items.durations.fields
+class TranslationsSettingsGroupsPomodoroItemsDurationsFieldsEnUs {
+	TranslationsSettingsGroupsPomodoroItemsDurationsFieldsEnUs.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
 
 	/// en-US: 'Focus Duration'
 	String get focus => 'Focus Duration';
@@ -636,4 +757,49 @@ class TranslationsSettingsGroupsPomodoroDurationsEnUs {
 
 	/// en-US: 'Long Break Duration'
 	String get longBreak => 'Long Break Duration';
+}
+
+// Path: settings.groups.pomodoro.items.autoStartPhases.options.always
+class TranslationsSettingsGroupsPomodoroItemsAutoStartPhasesOptionsAlwaysEnUs {
+	TranslationsSettingsGroupsPomodoroItemsAutoStartPhasesOptionsAlwaysEnUs.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en-US: 'Always'
+	String get label => 'Always';
+
+	/// en-US: 'Automatically start the next phase, whether the current one finishes naturally or is manually actioned (e.g., "Skip Phase").'
+	String get description => 'Automatically start the next phase, whether the current one finishes naturally or is manually actioned (e.g., "Skip Phase").';
+}
+
+// Path: settings.groups.pomodoro.items.autoStartPhases.options.onNaturalCompletion
+class TranslationsSettingsGroupsPomodoroItemsAutoStartPhasesOptionsOnNaturalCompletionEnUs {
+	TranslationsSettingsGroupsPomodoroItemsAutoStartPhasesOptionsOnNaturalCompletionEnUs.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en-US: 'On Natural Completion'
+	String get label => 'On Natural Completion';
+
+	/// en-US: 'Automatically start the next phase ONLY when the timer completes naturally. Manual actions like "Skip Phase" or "Reset Phase" will require a manual start.'
+	String get description => 'Automatically start the next phase ONLY when the timer completes naturally. Manual actions like "Skip Phase" or "Reset Phase" will require a manual start.';
+}
+
+// Path: settings.groups.pomodoro.items.autoStartPhases.options.never
+class TranslationsSettingsGroupsPomodoroItemsAutoStartPhasesOptionsNeverEnUs {
+	TranslationsSettingsGroupsPomodoroItemsAutoStartPhasesOptionsNeverEnUs.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en-US: 'Never'
+	String get label => 'Never';
+
+	/// en-US: 'Always require a manual start for the next phase. Not recommended!'
+	String get description => 'Always require a manual start for the next phase. Not recommended!';
 }

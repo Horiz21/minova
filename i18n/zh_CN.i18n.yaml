@@ -3,7 +3,7 @@ meta:
   languageName: 中文
   regionName: 中国大陆
   created: '2025-07-15'
-  updated: '2025-08-31'
+  updated: '2025-09-05'
 
 # Application title and slogan
 app:
@@ -19,6 +19,7 @@ common:
   failed: 失败
   resetToDefault: 恢复默认值
   minutes: 分钟
+  cycles: 轮次
 
 # Labels and option titles in the settings screen
 settings:
@@ -26,45 +27,62 @@ settings:
   groups:
     general:
       title: 通用
-      language: 语言
-      themeColor: 主题颜色
-      themeMode: 主题模式
+      items:
+        language:
+          label: 语言
+        themeColor:
+          label: 主题颜色
+          options:
+            graphite: 石墨
+            everflame: 永昼
+            abyssal: 鲸落
+            verdant: 苍苔
+            earthen: 沉香
+            twilight: 暮色
+        themeMode:
+          label: 主题模式
+          options:
+            light: 浅色模式
+            dark: 深色模式
+            system: 同步系统
     pomodoro:
       title: 番茄钟
-      durations:
-        title: 时长
-        focus: 专注时长
-        shortBreak: 短休息时长
-        longBreak: 长休息时长
-      cyclesBeforeLongBreak: 长休息前的专注轮数
-      autoStartNextCycle: 自动开始下一阶段
-      style: 样式
+      items:
+        durations:
+          label: 时长设置
+          fields:
+            focus: 专注时长
+            shortBreak: 短休息时长
+            longBreak: 长休息时长
+        longBreakInterval:
+          label: 长休息间隔
+          description: '每 $n 轮专注后进入长休息'
+        autoStartPhases:
+          label: 自动开始下一阶段
+          options:
+            always:
+              label: '始终'
+              description: '无论计时是自然结束还是手动操作，都将自动开始下一阶段。'
+            onNaturalCompletion:
+              label: '仅自然结束时'
+              description: '仅当计时器自然走完时才自动开始下一阶段。手动操作（如跳过或重置阶段）后需手动开始。'
+            never:
+              label: '从不'
+              description: '在任何情况下都需要手动开始下一阶段。不推荐。'
+        style:
+          label: 番茄钟样式
+          options:
+            currentTime: 当前时间
+            countdownTimer: 倒计时
+            progressBar: 进度环
+            breathingBall: 呼吸球
+            blank: 空白
     about:
       title: 关于
-      page: 项目主页
-      gitHub: GitHub 仓库
-      email: 联系邮箱
-
-# Theme modes and theme colors in the settings screen
-themeModes:
-  light: 浅色模式
-  dark: 深色模式
-  system: 同步系统
-themeColors:
-  graphite: 石墨
-  everflame: 永昼
-  abyssal: 鲸落
-  verdant: 苍苔
-  earthen: 沉香
-  twilight: 暮色
-
-# Pomodoro styles in the settings screen
-pomodoroStyles:
-  currentTime: 当前时间
-  countdownTimer: 倒计时
-  progressBar: 进度环
-  breathingBall: 呼吸球
-  blank: 空白
+      links:
+        page: 项目主页
+        gitHub: GitHub 仓库
+        email: 联系邮箱
 
 # Labels in the pomodoro screen (main screen)
 pomodoro:

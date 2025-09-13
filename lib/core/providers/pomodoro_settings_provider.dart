@@ -1,6 +1,6 @@
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:minova/core/models/pomodoro_settings_state.dart';
-import 'package:minova/features/pomodoro/widgets/pomodoro_display.dart';
+import 'package:minova/features/pomodoro/widgets/pomodoro_widget.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'pomodoro_settings_provider.g.dart';
@@ -24,19 +24,17 @@ class AppPomodoroSettings extends _$AppPomodoroSettings {
         'pomodoroLongBreakDuration',
         defaultValue: 15,
       ),
-      cyclesBeforeLongBreak: _settingsBox.get(
+      longBreakInterval: _settingsBox.get(
         'pomodoroCyclesBeforeLongBreak',
         defaultValue: 4,
       ),
-      autoStartAfterPhaseChange: _settingsBox.get(
-        'pomodoroAutoStartAfterPhaseChange',
-        defaultValue: true,
-      ),
-      displayMode:
-          PomodoroDisplayMode.values[_settingsBox.get(
-            'pomodoroDisplayMode',
-            defaultValue: 'countdownTimer',
+      autoStartPhaseMode:
+          AutoStartPhaseMode.values[_settingsBox.get(
+            'pomodoroAutoStartPhaseMode',
+            defaultValue: 0,
           )],
+      pomodoroStyle: PomodoroStyle
+          .values[_settingsBox.get('pomodoroDisplayMode', defaultValue: 0)],
     );
   }
 
@@ -51,18 +49,24 @@ class AppPomodoroSettings extends _$AppPomodoroSettings {
       newSettings.longBreakDuration,
     );
     _settingsBox.put(
-      'pomodoroCyclesBeforeLongBreak',
-      newSettings.cyclesBeforeLongBreak,
+      'pomodoroLongBreakInterval',
+      newSettings.longBreakInterval,
     );
     _settingsBox.put(
-      'pomodoroAutoStartAfterPhaseChange',
-      newSettings.autoStartAfterPhaseChange,
+      'pomodoroAutoStartPhaseMode',
+      newSettings.autoStartPhaseMode.index,
     );
+    _settingsBox.put('pomodoroDisplayMode', newSettings.pomodoroStyle.index);
     state = newSettings;
   }
 
-  void updateDisplayMode(PomodoroDisplayMode newDisplayMode) {
+  void updateAutoStartMode(AutoStartPhaseMode newMode) {
+    _settingsBox.put('pomodoroAutoStartPhaseMode', newMode.index);
+    state = state.copyWith(autoStartPhaseMode: newMode);
+  }
+
+  void updateDisplayMode(PomodoroStyle newDisplayMode) {
     _settingsBox.put('pomodoroDisplayMode', newDisplayMode.index);
-    state = state.copyWith(displayMode: newDisplayMode);
+    state = state.copyWith(pomodoroStyle: newDisplayMode);
   }
 }

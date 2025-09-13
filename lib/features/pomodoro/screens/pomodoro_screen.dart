@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:minova/core/providers/pomodoro_settings_provider.dart';
 import 'package:minova/features/pomodoro/models/pomodoro_models.dart';
 import 'package:minova/features/pomodoro/providers/pomodoro_provider.dart';
-import 'package:minova/features/pomodoro/widgets/pomodoro_display.dart';
+import 'package:minova/features/pomodoro/widgets/pomodoro_widget.dart';
 import 'package:minova/features/settings/screens/settings_screen.dart';
 import 'package:minova/gen/strings.g.dart';
 
@@ -40,8 +40,8 @@ class PomodoroScreen extends ConsumerWidget {
         children: [
           const SizedBox(height: 16),
           Expanded(
-            child: PomodoroDisplay(
-              displayMode: pomodoroSettingsState.displayMode,
+            child: PomodoroWidget(
+              displayMode: pomodoroSettingsState.pomodoroStyle,
               timeLeft: pomodoroState.timeLeftThisPhase,
               totalDuration: pomodoroState.totalDurationThisPhase,
               isRunning: pomodoroState.status == PomodoroStatus.running,
